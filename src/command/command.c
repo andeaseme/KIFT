@@ -12,21 +12,24 @@
 
 #include "kift.h"
 
+/*
+**	Set keywords
+*/
+
 static char const	*g_cmd_name[] = {
 	"unknown command",
 	"set egg timer",
 	NULL
 };
 
+/*
+**	Set command functions
+*/
+
 static int			(*g_cmd_func[])(void) = {
 	&cmd_unknown,
 	&cmd_seteggtimer
 };
-
-/*
-**	Search for a command string within the speech string
-**	and returns corresponding integer
-*/
 
 static int		cmd_find(char *speech)
 {
@@ -41,6 +44,11 @@ static int		cmd_find(char *speech)
 	}
 	return (0);
 }
+
+/*
+**	Search for a command string within the speech string
+**	and returns corresponding cmd_code then runs command in a fork
+*/
 
 int				command(char *speech)
 {
