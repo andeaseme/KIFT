@@ -5,6 +5,6 @@
 *.swp
 .DS_Store
 .nfs.*
-ft_db
-TEST*
-db/*
+server
+client
+
