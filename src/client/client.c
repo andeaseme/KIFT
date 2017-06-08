@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 19:50:38 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/06 21:05:59 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/07 17:20:14 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ void 	 send_file(char *filename, int sock_fd)
 	close(fd);
 }
 
+void 	send_voice(int sock_fd)
+{
+	system("rec -c 1 -r 16000 -b 16 recording.wav gain +5 silence 1 0.1 3% 1 2.0 3%");
+	send_file("recording.wav", sock_fd);
+}
+
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
@@ -61,5 +67,6 @@ int main(int argc,char **argv)
     connect(sockfd,(struct sockaddr *)&servaddr,sizeof(servaddr));
 
     send_file(argv[1], sockfd);
+	send_voice(sockfd);
 
 }
