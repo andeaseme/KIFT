@@ -1,0 +1,10 @@
+._*
+*.a
+*.o
+.vscode
+*.swp
+.DS_Store
+.nfs.*
+ft_db
+TEST*
+db/*
