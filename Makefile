@@ -29,7 +29,10 @@ SPHINXFLAGS =	-DMODELDIR=\"`pkg-config --variable=modeldir pocketsphinx`\" \
 
 DEPS =	$(IDIR)/kift.h
 
-_OBJ =	audiotostr.o client.o server.o
+_OBJ =	command.o set_egg_timer.o unknown_command.o \
+		audiotostr.o \
+		client.o \
+		server.o
 OBJ :=	$(addprefix $(ODIR)/,$(_OBJ))
 
 _C_OBJ =	client.o
@@ -48,6 +51,9 @@ $(OBJ): | $(ODIR)
 $(ODIR):
 		mkdir -p $@
 		@echo 'make directory $@'
+
+$(C_OBJ): $(OBJ)
+$(S_OBJ): $(OBJ)
 
 $(CLIENT): $(C_OBJ)
 		$(CC) -o $@ $^ $(CFLAGS) $(SPHINXFLAGS)

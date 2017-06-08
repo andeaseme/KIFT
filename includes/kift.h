@@ -27,10 +27,11 @@
 #define DICTDIR     MODELDIR "/en-us/cmudict-en-us.dict"
 #define READ_SIZE   512
 
+#define CMD_NUM			1
 /*
 ** src/speech_recognition
 */
-const char    *audiotostr(char *audiopath);
+const char		*audiotostr(char *audiopath);
 
 /*
 ** src/client
@@ -43,3 +44,6 @@ const char    *audiotostr(char *audiopath);
 /*
 ** src/command
 */
+int				command(char *speech);
+int				cmd_unknown(void);
+int				cmd_seteggtimer(void);
