@@ -42,13 +42,6 @@ void 	send_voice(int sock_fd)
 	send_file("recording.wav", sock_fd);
 }
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <stdio.h>
-#include <string.h>
-#include <arpa/inet.h>
-
 int main(int argc,char **argv)
 {
     int sockfd,n;
