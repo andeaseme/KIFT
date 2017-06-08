@@ -26,3 +26,20 @@
 #define LANGDIR     MODELDIR "/en-us/en-us.lm.bin"
 #define DICTDIR     MODELDIR "/en-us/cmudict-en-us.dict"
 #define READ_SIZE   512
+
+/*
+** src/speech_recognition
+*/
+const char    *audiotostr(char *audiopath);
+
+/*
+** src/client
+*/
+
+/*
+** src/server
+*/
+
+/*
+** src/command
+*/
