@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 00:22:58 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/06 21:06:08 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/07 17:22:42 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,6 @@ int main()
 	data = malloc(size);
 	read(comm_fd, data, size);
 	write(wav_fd, data, size);
+	char *command = audiotostr("new_wav.wav");
+	printf("%s\n", command);
 }
