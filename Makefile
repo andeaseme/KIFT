@@ -12,7 +12,6 @@
 
 CLIENT = client
 SERVER = server
-NAME: $(CLIENT) $(SERVER)
 
 IDIR =	includes
 ODIR :=	obj
@@ -35,10 +34,10 @@ OBJ :=	$(addprefix $(ODIR)/,$(_OBJ))
 _C_OBJ =	client.o
 C_OBJ :=	$(addprefix $(ODIR)/,$(_C_OBJ))
 
-_S_OBJ =	server.o
+_S_OBJ =	server.o audiotostr.o
 S_OBJ :=	$(addprefix $(ODIR)/,$(_S_OBJ))
 
-all: $(NAME)
+all: $(CLIENT) $(SERVER)
 
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS) $(SPHINXFLAGS)
