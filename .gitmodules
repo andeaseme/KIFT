@@ -1,3 +1,6 @@
 [submodule "resources/SAM"]
 	path = resources/SAM
 	url = https://github.com/s-macke/SAM.git
+[submodule "SAM"]
+	path = SAM
+	url = https://github.com/s-macke/SAM.git
