@@ -53,7 +53,7 @@ int main()
 		write(wav_fd, data, size);
 		system("chmod 777 new_wav.wav");
 		const char *command = audiotostr("new_wav.wav");
-		send_string(command, comm_fd);
+		send_string(command ? command : "ERROR", comm_fd);
 		system("rm -rf *.wav");
 	}
 }

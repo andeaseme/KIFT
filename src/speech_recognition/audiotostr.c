@@ -58,5 +58,6 @@ const char    *audiotostr(char *audiopath)
     fclose(fh);
     cmd_ln_free_r(config);
     ps_free(ps);
+    printf("audiotostr returning: '%s'\n", hyp);
     return(hyp);
 }
