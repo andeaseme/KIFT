@@ -15,6 +15,7 @@
 int		cmd_seteggtimer(void)
 {
 	printf("Setting egg timer...\n");
-
+	system("./SAM/sam 'hard or soft'");
+	
 	return (0);
 }

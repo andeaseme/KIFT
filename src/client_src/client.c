@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 19:50:38 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/08 21:01:11 by rpassafa         ###   ########.fr       */
+/*   Updated: 2017/06/07 17:20:14 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ int main(int argc,char **argv)
 
     send_file(argv[1], sockfd);
 	send_voice(sockfd);
+//	receive string
+//	run command
 
 }

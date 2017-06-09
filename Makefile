@@ -18,8 +18,8 @@ IDIR =	includes
 ODIR :=	obj
 SDIR =	src
 
-vpath %.c	$(SDIR) $(SDIR)/client $(SDIR)/server $(SDIR)/speech_recognition \
-			$(SDIR)/command
+vpath %.c	$(SDIR) $(SDIR)/client_src $(SDIR)/server_src \
+			$(SDIR)/speech_recognition $(SDIR)/command
 
 HEADERS = -I $(IDIR)
 CC = gcc
