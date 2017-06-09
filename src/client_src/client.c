@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 19:50:38 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/08 21:40:34 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/08 21:45:53 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int main(int argc,char **argv)
     char recvline[100];
     struct sockaddr_in servaddr;
 
+	system("rm -rf *.wav");
     sockfd=socket(AF_INET,SOCK_STREAM,0);
     bzero(&servaddr,sizeof servaddr);
 
