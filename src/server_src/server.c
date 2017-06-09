@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 00:22:58 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/08 21:47:38 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/08 22:17:05 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,25 @@ int main()
 
     servaddr.sin_family = AF_INET;
     servaddr.sin_addr.s_addr = htons(INADDR_ANY);
-    servaddr.sin_port = htons(22000);
+    servaddr.sin_port = htons(22002);
 
     bind(listen_fd, (struct sockaddr *) &servaddr, sizeof(servaddr));
-    listen(listen_fd, 10);
-    comm_fd = accept(listen_fd, (struct sockaddr*) NULL, NULL);
-	long size;
-	read(comm_fd, &size, sizeof(long));
-	printf("%li\n", (long)size);
-	int wav_fd = open("new_wav.wav", O_RDWR|O_CREAT);
-	void *data;
-	data = malloc(size);
-	read(comm_fd, data, size);
-	write(wav_fd, data, size);
-	const char *command = audiotostr("new_wav.wav");
-	printf("%s\n", command);
-	send_string(command, comm_fd);
+	while (1)
+	{
+		system("rm -rf *.wav");
+	    listen(listen_fd, 10);
+	    comm_fd = accept(listen_fd, (struct sockaddr*) NULL, NULL);
+		long size;
+		read(comm_fd, &size, sizeof(long));
+		printf("%li\n", (long)size);
+		int wav_fd = open("new_wav.wav", O_RDWR|O_CREAT);
+		void *data;
+		data = malloc(size);
+		read(comm_fd, data, size);
+		write(wav_fd, data, size);
+		system("chmod 777 new_wav.wav");
+		const char *command = audiotostr("new_wav.wav");
+		send_string(command, comm_fd);
+		system("rm -rf *.wav");
+	}
 }
