@@ -50,9 +50,10 @@ const char    *audiotostr(char *audiopath)
     rv = ps_start_utt(ps);
     while (0 == feof(fh))
     {
-        nsamp = fread(buf, 2, READ_SIZE, fh);
+        nsamp = fread(buf, sizeof(int16), READ_SIZE, fh);
         rv = ps_process_raw(ps, buf, nsamp, FALSE, FALSE);
     }
+    fflush(stdout);
     rv = ps_end_utt(ps);
     hyp = ps_get_hyp(ps, &score);
     fclose(fh);

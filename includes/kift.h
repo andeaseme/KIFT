@@ -25,7 +25,7 @@
 #define HMMDIR      MODELDIR "/en-us/en-us"
 #define LANGDIR     MODELDIR "/en-us/en-us.lm.bin"
 #define DICTDIR     MODELDIR "/en-us/cmudict-en-us.dict"
-#define READ_SIZE   512
+#define READ_SIZE   2048
 
 /*
 ** src/speech_recognition
