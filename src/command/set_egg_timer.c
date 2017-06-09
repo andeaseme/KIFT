@@ -12,10 +12,10 @@
 
 #include "kift.h"
 
-int		cmd_seteggtimer(void)
+int			cmd_seteggtimer(int sockfd)
 {
 	printf("Setting egg timer...\n");
 	system("./SAM/sam 'hard or soft'");
-	
-	return (0);
+	send_voice(sockfd);
+	//receive_string(sockfd);
 }

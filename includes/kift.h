@@ -43,6 +43,6 @@ const char		*audiotostr(char *audiopath);
 /*
 ** src/command
 */
-int				command(char *speech);
-int				cmd_unknown(void);
-int				cmd_seteggtimer(void);
+int				command(char *speech, int sockfd);
+int				cmd_unknown(int sockfd);
+int				cmd_seteggtimer(int sockfd);

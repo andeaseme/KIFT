@@ -12,8 +12,8 @@
 
 #include "kift.h"
 
-int		cmd_unknown(void)
+int		cmd_unknown(int sockfd)
 {
-
+	(void)sockfd;
 	return (0);
 }

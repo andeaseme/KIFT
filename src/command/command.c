@@ -26,7 +26,7 @@ static char const	*g_cmd_name[] = {
 **	Set command functions
 */
 
-static int			(*g_cmd_func[])(void) = {
+static int			(*g_cmd_func[])(int sockfd) = {
 	&cmd_unknown,
 	&cmd_seteggtimer
 };
@@ -50,7 +50,7 @@ static int		cmd_find(char *speech)
 **	and returns corresponding cmd_code then runs command in a fork
 */
 
-int				command(char *speech)
+int				command(char *speech, int sockfd)
 {
 	int		cmd_code;
 	int		status;
@@ -59,7 +59,7 @@ int				command(char *speech)
 	cmd_code = cmd_find(speech);
 	f = fork();
 	if (0 == f)
-		exit(g_cmd_func[cmd_code]());
+		exit(g_cmd_func[cmd_code](sockfd));
 	else if (-1 == f)
 		fprintf(stderr, "Failed to create fork for command: %s\n",
 			g_cmd_name[cmd_code]);
