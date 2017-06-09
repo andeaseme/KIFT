@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   audiotostr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aphan <aphan@student.42.us.org>            +#+  +:+       +#+        */
+/*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 14:45:49 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/07 14:45:51 by aphan            ###   ########.fr       */
+/*   Updated: 2017/06/08 22:05:23 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ const char    *audiotostr(char *audiopath)
     int32           score;
 
 
+	system("play new_wav.wav");
     if (NULL == (config = cmd_ln_init(NULL, ps_args(), TRUE,
             "-hmm", HMMDIR,
             "-lm", LANGDIR,

@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 19:50:38 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/08 21:45:53 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/08 22:15:30 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int main(int argc,char **argv)
     bzero(&servaddr,sizeof servaddr);
 
     servaddr.sin_family=AF_INET;
-    servaddr.sin_port=htons(22000);
+    servaddr.sin_port=htons(22002);
 
     inet_pton(AF_INET,"127.0.0.1",&(servaddr.sin_addr));
 
