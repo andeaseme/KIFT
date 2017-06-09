@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 19:50:38 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/07 17:20:14 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/08 21:40:34 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,17 @@ void 	send_voice(int sock_fd)
 	send_file("recording.wav", sock_fd);
 }
 
+char	*recieve_string(int sock_fd)
+{
+	char buff[4096];
+	int bytes_read;
+	uint32_t len;
+	read(sock_fd, &len, sizeof(uint32_t));
+	bytes_read = read(sock_fd, &buff, len * (sizeof(char)));
+	buff[bytes_read] = '\0';
+	return (buff);
+}
+
 int main(int argc,char **argv)
 {
     int sockfd,n;
@@ -58,10 +69,6 @@ int main(int argc,char **argv)
     inet_pton(AF_INET,"127.0.0.1",&(servaddr.sin_addr));
 
     connect(sockfd,(struct sockaddr *)&servaddr,sizeof(servaddr));
-
-    send_file(argv[1], sockfd);
 	send_voice(sockfd);
-//	receive string
-//	run command
-
+	printf("%s\n", recieve_string(sockfd));
 }

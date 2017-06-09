@@ -6,11 +6,20 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 00:22:58 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/07 17:22:42 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/08 21:41:37 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "kift.h"
+
+void 	send_string(char *str, int comm_fd)
+{
+	uint32_t len;
+
+	len = strlen(str);
+	write(comm_fd, &len, sizeof(uint32_t));
+	write(comm_fd, str, sizeof(char) * len);
+}
 
 int main()
 {
@@ -39,6 +48,7 @@ int main()
 	data = malloc(size);
 	read(comm_fd, data, size);
 	write(wav_fd, data, size);
-	char *command = audiotostr("new_wav.wav");
+	const char *command = audiotostr("new_wav.wav");
 	printf("%s\n", command);
+	send_string(command, comm_fd);
 }
