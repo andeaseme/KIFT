@@ -35,7 +35,7 @@ _OBJ =	command.o set_egg_timer.o unknown_command.o \
 		server.o
 OBJ :=	$(addprefix $(ODIR)/,$(_OBJ))
 
-_C_OBJ =	client.o
+_C_OBJ =	client.o command.o set_egg_timer.o unknown_command.o
 C_OBJ :=	$(addprefix $(ODIR)/,$(_C_OBJ))
 
 _S_OBJ =	server.o audiotostr.o

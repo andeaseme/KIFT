@@ -19,6 +19,7 @@
 static char const	*g_cmd_name[] = {
 	"unknown command",
 	"set egg timer",
+	"set a timer",
 	NULL
 };
 
@@ -28,14 +29,15 @@ static char const	*g_cmd_name[] = {
 
 static int			(*g_cmd_func[])(int sockfd) = {
 	&cmd_unknown,
-	&cmd_seteggtimer
+	&cmd_seteggtimer,
+	&cmd_seteggtimer	
 };
 
-static int		cmd_find(char *speech)
+int		find_string(char *speech, char *targets[])
 {
 	int		i;
 
-	i = 1;
+	i = 0;
 	while (g_cmd_name[i])
 	{
 		if (NULL != strstr(speech, g_cmd_name[i]))
@@ -56,7 +58,7 @@ int				command(char *speech, int sockfd)
 	int		status;
 	pid_t	f;
 
-	cmd_code = cmd_find(speech);
+	cmd_code = find_string(speech, g_cmd_name);
 	f = fork();
 	if (0 == f)
 		exit(g_cmd_func[cmd_code](sockfd));

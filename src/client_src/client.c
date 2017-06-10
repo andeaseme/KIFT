@@ -42,7 +42,7 @@ void 	send_voice(int sock_fd)
 	send_file("recording.wav", sock_fd);
 }
 
-char	*recieve_string(int sock_fd)
+char	*receive_string(int sock_fd)
 {
 	char buff[4096];
 	int bytes_read;
@@ -59,6 +59,7 @@ int main(int argc,char **argv)
     char sendline[100];
     char recvline[100];
     struct sockaddr_in servaddr;
+	char	*speech;
 
 	system("rm -rf *.wav");
     sockfd=socket(AF_INET,SOCK_STREAM,0);
@@ -71,5 +72,7 @@ int main(int argc,char **argv)
 
     connect(sockfd,(struct sockaddr *)&servaddr,sizeof(servaddr));
 	send_voice(sockfd);
-	printf("%s\n", recieve_string(sockfd));
+	printf("%s\n", speech = receive_string(sockfd));
+	command(speech, sockfd);
+	return (0);
 }
