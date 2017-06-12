@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 00:22:58 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/11 22:09:09 by rpassafa         ###   ########.fr       */
+/*   Updated: 2017/06/11 22:10:55 by rpassafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int main()
 		system("chmod 777 new_wav.wav");
 		const char *command = audiotostr("new_wav.wav");
 		send_string(command ? command : "ERROR", comm_fd);
-		system(ft_strjoin("cp new_wave.wav ./Train_src/serv_save/audio_", ft_itoa(i)));
+		system(ft_strjoin("cp new_wav.wav ./Train_src/serv_save/audio_", ft_itoa(i)));
 		i++;
 		fp = fopen ("./Train_src/serv_save/NUM.txt", "w");
 		// system("rm -rf *.wav");
