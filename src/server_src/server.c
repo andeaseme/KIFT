@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 00:22:58 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/08 22:17:05 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/11 17:26:57 by rpassafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,30 @@ void 	send_string(char *str, int comm_fd)
 int main()
 {
 
-    char str[100];
-    int listen_fd, comm_fd;
+	char str[100];
+	int listen_fd, comm_fd;
+	struct sockaddr_in servaddr;
+	int i;
+	FILE *fp;
 
-    struct sockaddr_in servaddr;
-
-    listen_fd = socket(AF_INET, SOCK_STREAM, 0);
-
-    bzero( &servaddr, sizeof(servaddr));
-
-    servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = htons(INADDR_ANY);
-    servaddr.sin_port = htons(22002);
-
+	i = 0;
+	if (lstat("./Train_src/serv_save/NUM") != -1)
+	{
+		fp = fopen ("./Train_src/serv_save/NUM.txt", "r");
+		fscanf (fp, "%d", &i);
+		fclose(fp);
+	}
+	listen_fd = socket(AF_INET, SOCK_STREAM, 0);
+	bzero( &servaddr, sizeof(servaddr));
+	servaddr.sin_family = AF_INET;
+	servaddr.sin_addr.s_addr = htons(INADDR_ANY);
+	servaddr.sin_port = htons(22002);
     bind(listen_fd, (struct sockaddr *) &servaddr, sizeof(servaddr));
 	while (1)
 	{
-		system("rm -rf *.wav");
-	    listen(listen_fd, 10);
-	    comm_fd = accept(listen_fd, (struct sockaddr*) NULL, NULL);
+		// system("rm -rf *.wav");
+		listen(listen_fd, 10);
+		comm_fd = accept(listen_fd, (struct sockaddr*) NULL, NULL);
 		long size;
 		read(comm_fd, &size, sizeof(long));
 		printf("%li\n", (long)size);
@@ -54,6 +59,10 @@ int main()
 		system("chmod 777 new_wav.wav");
 		const char *command = audiotostr("new_wav.wav");
 		send_string(command ? command : "ERROR", comm_fd);
-		system("rm -rf *.wav");
+		system(ft_strjoin("mv new_wave.wav ./Train_src/serv_save/audio_", ft_itoa(i)));
+		i++;
+		// system("rm -rf *.wav");
 	}
+	fp = fopen ("./Train_src/serv_save/NUM.txt", "w");
+	fprintf(fp, "%d", i);
 }
