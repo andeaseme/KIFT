@@ -60,3 +60,5 @@ dkms.conf
 .nfs.*
 server
 client
+new_wav.wav
+recording.wav
