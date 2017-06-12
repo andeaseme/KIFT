@@ -24,6 +24,8 @@
 #include <pocketsphinx.h>
 #include "libft.h"
 
+#define BW			"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/bw"
+
 #define HMMDIR      "ROB"
 #define LANGDIR     "ROB/en-us.lm.bin"
 #define DICTDIR     "ROB/cmudict-en-us.dict"

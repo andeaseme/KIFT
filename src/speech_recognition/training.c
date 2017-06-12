@@ -14,6 +14,18 @@
 
 void	training(char *speech, char *audiopath)
 {
-	 
-	 ft_strcat_multi(./bw)
+	 char	buf[2048]
+	 ft_strcat_multi(buf, BW,
+		" -hmmdir ", HHMDIR,
+		" -moddeffn ", HHMDIR, "/mdef.txt",
+		" -ts2cbfn .ptm.",
+		" -feat 1s_c_d_dd",
+		" -svspec 0-12/13-25/26-38",
+		" -cmn current",
+		" -agc none",
+		" -dictfn cmudict-en-us.dict",
+		" -ctlfn arctic20.fileids",
+		" -lsnfn arctic20.transcription",
+		" -accumdir .",
+		NULL);
 }
