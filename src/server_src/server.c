@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 00:22:58 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/11 21:31:55 by rpassafa         ###   ########.fr       */
+/*   Updated: 2017/06/11 22:03:26 by rpassafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int main()
 	FILE *fp;
 
 	i = 0;
-	if (lstat("./Train_src/serv_save/", NULL) != -1)
+	if (lstat("./Train_src/serv_save/", NULL) == -1)
 	{
 		mkdir("./Train_src/serv_save/", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	}
@@ -64,8 +64,8 @@ int main()
 		send_string(command ? command : "ERROR", comm_fd);
 		system(ft_strjoin("mv new_wave.wav ./Train_src/serv_save/audio_", ft_itoa(i)));
 		i++;
+		fp = fopen ("./Train_src/serv_save/NUM.txt", "w");
 		// system("rm -rf *.wav");
 	}
-	fp = fopen ("./Train_src/serv_save/NUM.txt", "w");
 	fprintf(fp, "%d", i);
 }
