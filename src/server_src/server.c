@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 00:22:58 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/11 17:26:57 by rpassafa         ###   ########.fr       */
+/*   Updated: 2017/06/11 21:31:55 by rpassafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ int main()
 	FILE *fp;
 
 	i = 0;
+	if (lstat("./Train_src/serv_save/", NULL) != -1)
+	{
+		mkdir("./Train_src/serv_save/", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+	}
 	if (lstat("./Train_src/serv_save/NUM", NULL) != -1)
 	{
 		fp = fopen ("./Train_src/serv_save/NUM.txt", "r");
@@ -45,7 +49,6 @@ int main()
     bind(listen_fd, (struct sockaddr *) &servaddr, sizeof(servaddr));
 	while (1)
 	{
-		// system("rm -rf *.wav");
 		listen(listen_fd, 10);
 		comm_fd = accept(listen_fd, (struct sockaddr*) NULL, NULL);
 		long size;
