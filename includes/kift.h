@@ -22,6 +22,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <pocketsphinx.h>
+#include "libft.h"
 
 #define HMMDIR      "ROB"
 #define LANGDIR     "ROB/en-us.lm.bin"

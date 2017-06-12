@@ -14,6 +14,7 @@ CLIENT = client
 SERVER = server
 NAME = $(SERVER) $(CLIENT)
 
+LDIR =	libft
 IDIR =	includes
 ODIR :=	obj
 SDIR =	src
@@ -21,12 +22,13 @@ SDIR =	src
 vpath %.c	$(SDIR) $(SDIR)/client_src $(SDIR)/server_src \
 			$(SDIR)/speech_recognition $(SDIR)/command
 
-HEADERS = -I $(IDIR)
+HEADERS = -I $(IDIR) -I $(LDIR)/includes
 CC = gcc
-CFLAGS = $(HEADERS) #-Wall -Wextra -Werror -g
+CFLAGS = $(HEADERS) -g #-Wall -Wextra -Werror
 SPHINXFLAGS =	-DMODELDIR=\"`pkg-config --variable=modeldir pocketsphinx`\" \
 				`pkg-config --cflags --libs pocketsphinx sphinxbase`
 
+LIBFT =	-L $(LDIR) -lft
 DEPS =	$(IDIR)/kift.h
 
 _OBJ =	command.o set_egg_timer.o unknown_command.o \
@@ -52,24 +54,28 @@ $(ODIR):
 		mkdir -p $@
 		@echo 'make directory $@'
 
-$(C_OBJ): $(OBJ)
-$(S_OBJ): $(OBJ)
+FORCE:
 
-$(CLIENT): $(C_OBJ)
+$(LIBFT): FORCE
+		$(MAKE) -C $(LDIR)
+
+$(CLIENT): $(C_OBJ) $(LIBFT)
 		$(CC) -o $@ $^ $(CFLAGS) $(SPHINXFLAGS)
 		@echo 'compile $@'
 
-$(SERVER): $(S_OBJ)
+$(SERVER): $(S_OBJ) $(LIBFT)
 		$(CC) -o $@ $^ $(CFLAGS) $(SPHINXFLAGS)
 		@echo 'compile $@'
 
 clean:
 		/bin/rm -rfv $(ODIR)
 		@echo '$@ $(NAME) $(ODIR)'
+		$(MAKE) -C $(LDIR) $@
 
 fclean: clean
 		/bin/rm -f $(NAME)
 		@echo '$< $(NAME)'
+		$(MAKE) -C $(LDIR) $@
 
 re: fclean all
 

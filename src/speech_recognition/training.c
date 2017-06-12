@@ -15,4 +15,5 @@
 void	training(char *speech, char *audiopath)
 {
 	 
+	 ft_strcat_multi(./bw)
 }

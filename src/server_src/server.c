@@ -31,7 +31,7 @@ int main()
 	FILE *fp;
 
 	i = 0;
-	if (lstat("./Train_src/serv_save/NUM") != -1)
+	if (lstat("./Train_src/serv_save/NUM", NULL) != -1)
 	{
 		fp = fopen ("./Train_src/serv_save/NUM.txt", "r");
 		fscanf (fp, "%d", &i);
