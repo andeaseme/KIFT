@@ -21,7 +21,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <time.h>
-#include <pocketsphinx.h>
 #include "libft.h"
 
 #define BW			"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/bw"
@@ -39,7 +38,7 @@ const char		*audiotostr(char *audiopath);
 /*
 ** src/client
 */
-char			*recieve_string(int sock_fd);
+char			*receive_string(int sock_fd);
 void 			send_voice(int sock_fd);
 
 /*
@@ -50,7 +49,7 @@ void 			send_voice(int sock_fd);
 ** src/command
 */
 int				command(char *speech, int sockfd);
-int				find_string(char *speech, char *targets[]);
+int				find_string(char *speech, char const *targets[]);
 int				cmd_unknown(int sockfd);
 int				cmd_seteggtimer(int sockfd);
 int				cmd_showmetemps(int sockfd);

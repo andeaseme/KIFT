@@ -15,6 +15,7 @@
 void	training(char *speech, char *audiopath)
 {
 	 char	buf[2048]
+	 
 	 ft_strcat_multi(buf, BW,
 		" -hmmdir ", HHMDIR,
 		" -moddeffn ", HHMDIR, "/mdef.txt",

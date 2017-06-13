@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "kift.h"
+#include <pocketsphinx.h>
 
 const char    *audiotostr(char *audiopath)
 {

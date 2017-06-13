@@ -18,13 +18,15 @@ LDIR =	libft
 IDIR =	includes
 ODIR :=	obj
 SDIR =	src
+PS_IDIR = ~/.brew/Cellar/cmu-pocketsphinx/HEAD-05b866c/include/pocketsphinx
+S_IDIR = ~/.brew/Cellar/cmu-sphinxbase/HEAD-27a98f9/include
 
 vpath %.c	$(SDIR) $(SDIR)/client_src $(SDIR)/server_src \
 			$(SDIR)/speech_recognition $(SDIR)/command
 
-HEADERS = -I $(IDIR) -I $(LDIR)/includes
+HEADERS = -I $(IDIR) -I $(LDIR)/includes -I $(PS_IDIR) -I $(S_IDIR) -I $(S_IDIR)/sphinxbase
 CC = gcc
-CFLAGS = $(HEADERS) -g #-Wall -Wextra -Werror
+CFLAGS = $(HEADERS) -g -Wall -Wextra -Werror
 SPHINXFLAGS =	-DMODELDIR=\"`pkg-config --variable=modeldir pocketsphinx`\" \
 				`pkg-config --cflags --libs pocketsphinx sphinxbase`
 
@@ -37,6 +39,7 @@ _OBJ =	command.o set_egg_timer.o unknown_command.o \
 		server.o
 OBJ :=	$(addprefix $(ODIR)/,$(_OBJ))
 
+
 _C_OBJ =	client.o command.o set_egg_timer.o unknown_command.o
 C_OBJ :=	$(addprefix $(ODIR)/,$(_C_OBJ))
 
@@ -46,7 +49,7 @@ S_OBJ :=	$(addprefix $(ODIR)/,$(_S_OBJ))
 all: $(NAME)
 
 $(ODIR)/%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS) $(SPHINXFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(OBJ): | $(ODIR)
 
