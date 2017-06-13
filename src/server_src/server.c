@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 00:22:58 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/12 18:49:39 by rpassafa         ###   ########.fr       */
+/*   Updated: 2017/06/12 19:11:31 by rpassafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main()
 	FILE *fp;
 
 	i = 0;
-	if (lstat("./Train_src/serv_save/", NULL) != -1)
+	if (lstat("./Train_src/serv_save/", NULL) == -1)
 	{
 		mkdir("./Train_src/serv_save/", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	}
