@@ -44,15 +44,14 @@ void 	send_voice(int sock_fd)
 
 char	*receive_string(int sock_fd)
 {
-	char		*buff;
+	char		buff[4096];
 	int			bytes_read;
 	uint32_t	len;
 	
-	buff = calloc(4096, sizeof(char *));
 	read(sock_fd, &len, sizeof(uint32_t));
 	bytes_read = read(sock_fd, &buff, len * (sizeof(char)));
 	buff[bytes_read] = '\0';
-	return (buff);
+	return (ft_strdup(buff));
 }
 
 int main(void)
