@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aphan <aphan@student.42.us.org>            +#+  +:+       +#+        */
+/*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:49:45 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/08 14:49:49 by aphan            ###   ########.fr       */
+/*   Updated: 2017/06/12 18:16:08 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static char const	*g_cmd_name[] = {
 	"unknown command",
 	"set egg timer",
 	"set a timer",
+	"show me temps",
 	NULL
 };
 
@@ -27,10 +28,16 @@ static char const	*g_cmd_name[] = {
 **	Set command functions
 */
 
+int					cmd_showmetemps(int sockfd)
+{
+	system("osx-cpu-temp");
+}
+
 static int			(*g_cmd_func[])(int sockfd) = {
 	&cmd_unknown,
 	&cmd_seteggtimer,
-	&cmd_seteggtimer	
+	&cmd_seteggtimer,
+	&cmd_showmetemps
 };
 
 int		find_string(char *speech, char *targets[])
