@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 16:00:37 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/12 18:14:51 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/12 21:53:03 by rpassafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@
 #define DICTDIR     "ROB/cmudict-en-us.dict"
 #define READ_SIZE   2048
 
+
+struct s_con
+{
+	int sock_fd;
+	struct sockaddr_in servaddr;
+};
 /*
 ** src/speech_recognition
 */
@@ -38,8 +44,8 @@ const char		*audiotostr(char *audiopath);
 /*
 ** src/client
 */
-char			*receive_string(int sock_fd);
-void 			send_voice(int sock_fd);
+char			*receive_string(struct s_con temp);
+void 			send_voice(struct s_con temp);
 
 /*
 ** src/server
@@ -48,8 +54,8 @@ void 			send_voice(int sock_fd);
 /*
 ** src/command
 */
-int				command(char *speech, int sockfd);
+int				command(char *speech, struct s_con temp);
 int				find_string(char *speech, char const *targets[]);
-int				cmd_unknown(int sockfd);
-int				cmd_seteggtimer(int sockfd);
-int				cmd_showmetemps(int sockfd);
+int				cmd_unknown(struct s_con temp);
+int				cmd_seteggtimer(struct s_con temp);
+int				cmd_showmetemps(struct s_con temp);

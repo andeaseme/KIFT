@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   set_egg_timer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aphan <aphan@student.42.us.org>            +#+  +:+       +#+        */
+/*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:50:22 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/08 14:50:32 by aphan            ###   ########.fr       */
+/*   Updated: 2017/06/12 21:49:32 by rpassafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "kift.h"
 
-int			cmd_seteggtimer(int sockfd)
+int			cmd_seteggtimer(struct s_con temp)
 {
 	char const	*targets[] = {"hard", "soft", NULL};
 	char		*speech;
@@ -22,8 +22,8 @@ int			cmd_seteggtimer(int sockfd)
 	start = clock();
 	printf("Setting egg timer...\n");
 	system("./SAM/sam 'Setting egg timer. hard or soft boil.'");
-	send_voice(sockfd);
-	speech = receive_string(sockfd);
+	send_voice(temp);
+	speech = receive_string(temp);
 	if (find_string(speech, targets))
 	{
 		time = 24000;

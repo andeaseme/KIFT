@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   unknown_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aphan <aphan@student.42.us.org>            +#+  +:+       +#+        */
+/*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 15:02:30 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/08 15:03:13 by aphan            ###   ########.fr       */
+/*   Updated: 2017/06/12 21:56:11 by rpassafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "kift.h"
 
-int		cmd_unknown(int sockfd)
+int		cmd_unknown(struct s_con temp)
 {
-	(void)sockfd;
+	(void)temp.sock_fd;
 	return (0);
 }
