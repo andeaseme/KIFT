@@ -44,23 +44,22 @@ void 	send_voice(int sock_fd)
 
 char	*receive_string(int sock_fd)
 {
-	char		buff[4096];
+	char		*buff;
 	int			bytes_read;
 	uint32_t	len;
 	
+	buff = calloc(4096, sizeof(char *));
 	read(sock_fd, &len, sizeof(uint32_t));
 	bytes_read = read(sock_fd, &buff, len * (sizeof(char)));
 	buff[bytes_read] = '\0';
 	return (buff);
 }
 
-int main(int argc,char **argv)
+int main(void)
 {
-    int sockfd,n;
-    char sendline[100];
-    char recvline[100];
+    int sockfd;
     struct sockaddr_in servaddr;
-	char	*speech;
+	char	*speech = NULL;
 
 	system("rm -rf *.wav");
     sockfd=socket(AF_INET,SOCK_STREAM,0);
@@ -75,5 +74,6 @@ int main(int argc,char **argv)
 	send_voice(sockfd);
 	printf("%s\n", speech = receive_string(sockfd));
 	command(speech, sockfd);
+	free(speech);
 	return (0);
 }

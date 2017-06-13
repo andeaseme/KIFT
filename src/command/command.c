@@ -40,7 +40,7 @@ int		find_string(char *speech, char const *targets[])
 	i = 0;
 	while (g_cmd_name[i])
 	{
-		if (NULL != strstr(speech, g_cmd_name[i]))
+		if (NULL != strstr(speech, targets[i]))
 			return (i);
 		i++;
 	}
@@ -55,7 +55,6 @@ int		find_string(char *speech, char const *targets[])
 int				command(char *speech, int sockfd)
 {
 	int		cmd_code;
-	int		status;
 	pid_t	f;
 
 	cmd_code = find_string(speech, g_cmd_name);

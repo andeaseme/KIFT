@@ -38,7 +38,7 @@ const char		*audiotostr(char *audiopath);
 /*
 ** src/client
 */
-char			*recieve_string(int sock_fd);
+char			*receive_string(int sock_fd);
 void 			send_voice(int sock_fd);
 
 /*

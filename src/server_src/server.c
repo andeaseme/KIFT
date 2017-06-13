@@ -23,8 +23,6 @@ void 	send_string(char *str, int comm_fd)
 
 int main()
 {
-
-	// char str[100];
 	int listen_fd, comm_fd;
 	struct sockaddr_in servaddr;
 	int i;
