@@ -82,4 +82,7 @@ fclean: clean
 
 re: fclean all
 
+wav: all
+	/bin/rm -rfv Train_src/serv_save
+
 .PHONY: all clean fclean re
