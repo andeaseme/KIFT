@@ -33,7 +33,7 @@ static int			(*g_cmd_func[])(int sockfd) = {
 	&cmd_seteggtimer	
 };
 
-int		find_string(char *speech, char *targets[])
+int		find_string(char *speech, char const *targets[])
 {
 	int		i;
 

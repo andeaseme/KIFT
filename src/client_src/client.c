@@ -44,9 +44,10 @@ void 	send_voice(int sock_fd)
 
 char	*receive_string(int sock_fd)
 {
-	char buff[4096];
-	int bytes_read;
-	uint32_t len;
+	char		buff[4096];
+	int			bytes_read;
+	uint32_t	len;
+	
 	read(sock_fd, &len, sizeof(uint32_t));
 	bytes_read = read(sock_fd, &buff, len * (sizeof(char)));
 	buff[bytes_read] = '\0';

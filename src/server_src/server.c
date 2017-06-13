@@ -24,7 +24,7 @@ void 	send_string(char *str, int comm_fd)
 int main()
 {
 
-	char str[100];
+	//char str[100];
 	int listen_fd, comm_fd;
 	struct sockaddr_in servaddr;
 	int i;
@@ -61,7 +61,7 @@ int main()
 		write(wav_fd, data, size);
 		system("chmod 777 new_wav.wav");
 		const char *command = audiotostr("new_wav.wav");
-		send_string(command ? command : "ERROR", comm_fd);
+		send_string(command ? (char *)command : "ERROR", comm_fd);
 		system(ft_strjoin("cp new_wav.wav ./Train_src/serv_save/audio_", ft_itoa(i)));
 		i++;
 		fp = fopen ("./Train_src/serv_save/NUM.txt", "w");
