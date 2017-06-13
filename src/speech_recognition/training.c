@@ -15,7 +15,14 @@
 void	training(char *speech, char *audiopath)
 {
 	 char	buf[2048]
-	 
+
+	printf("Did you say the following? [Y\n]\n%s\n", speech);
+	//play audio
+	//prompt for yes no
+	//if no prompt to type it out
+
+	//find or append fileids and transcription
+	
 	 ft_strcat_multi(buf, BW,
 		" -hmmdir ", HHMDIR,
 		" -moddeffn ", HHMDIR, "/mdef.txt",
@@ -24,9 +31,11 @@ void	training(char *speech, char *audiopath)
 		" -svspec 0-12/13-25/26-38",
 		" -cmn current",
 		" -agc none",
-		" -dictfn cmudict-en-us.dict",
+		" -dictfn ", DICTDIR,
 		" -ctlfn arctic20.fileids",
 		" -lsnfn arctic20.transcription",
 		" -accumdir .",
 		NULL);
+	system(buf);
+		
 }

@@ -61,6 +61,7 @@ FORCE:
 
 $(LIBFT): FORCE
 		$(MAKE) -C $(LDIR)
+		$(MAKE) -C SAM
 
 $(CLIENT): $(C_OBJ) $(LIBFT)
 		$(CC) -o $@ $^ $(CFLAGS) $(SPHINXFLAGS)
