@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:49:45 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/12 18:16:08 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/12 18:24:45 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static char const	*g_cmd_name[] = {
 int					cmd_showmetemps(int sockfd)
 {
 	system("osx-cpu-temp");
+	return (sockfd);
 }
 
 static int			(*g_cmd_func[])(int sockfd) = {
