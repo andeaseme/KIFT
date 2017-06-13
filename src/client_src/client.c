@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 19:50:38 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/12 18:46:15 by rpassafa         ###   ########.fr       */
+/*   Updated: 2017/06/12 19:12:09 by rpassafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ char	*receive_string(int sock_fd)
 	read(sock_fd, &len, sizeof(uint32_t));
 	bytes_read = read(sock_fd, &buff, len * (sizeof(char)));
 	buff[bytes_read] = '\0';
-	printf("%s\n", "test");
-	printf("%s\n", buff);
-	printf("%s\n", "test");
+	// printf("%s\n", "test");
+	// printf("%s\n", buff);
+	// printf("%s\n", "test");
 	return (ft_strdup(buff));
 }
 
