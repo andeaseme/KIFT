@@ -6,13 +6,13 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:50:22 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/12 21:49:32 by rpassafa         ###   ########.fr       */
+/*   Updated: 2017/06/12 22:31:09 by rpassafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "kift.h"
 
-int			cmd_seteggtimer(struct s_con temp)
+int			cmd_seteggtimer(struct s_con *temp)
 {
 	char const	*targets[] = {"hard", "soft", NULL};
 	char		*speech;

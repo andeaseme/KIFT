@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 00:22:58 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/12 21:59:49 by rpassafa         ###   ########.fr       */
+/*   Updated: 2017/06/12 22:34:40 by rpassafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int main()
 
 	i = 0;
 	if (lstat("./Train_src/serv_save/", NULL) == -1)
-	{
 		mkdir("./Train_src/serv_save/", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-	}
 	if (lstat("./Train_src/serv_save/NUM", NULL) != -1)
 	{
 		fp = fopen ("./Train_src/serv_save/NUM.txt", "r");
@@ -43,11 +41,11 @@ int main()
 	bzero( &servaddr, sizeof(servaddr));
 	servaddr.sin_family = AF_INET;
 	servaddr.sin_addr.s_addr = htons(INADDR_ANY);
-	servaddr.sin_port = htons(22002);
+	servaddr.sin_port = htons(22005);
     bind(listen_fd, (struct sockaddr *) &servaddr, sizeof(servaddr));
 	while (1)
 	{
-		listen(listen_fd, 10);
+		printf("%d\n",listen(listen_fd, 10));
 		comm_fd = accept(listen_fd, (struct sockaddr*) NULL, NULL);
 		long size;
 		read(comm_fd, &size, sizeof(long));
@@ -62,8 +60,10 @@ int main()
 		send_string(command ? (char*)command : "ERROR", comm_fd);
 		system(ft_strjoin("cp new_wav.wav ./Train_src/serv_save/audio_", ft_itoa(i)));
 		i++;
+		fp = fopen ("./Train_src/serv_save/NUM.txt", "w");
+		fprintf(fp, "%d", i);
+		fclose(fp);
+		close(comm_fd);
 		// system("rm -rf *.wav");s
 	}
-	fp = fopen ("./Train_src/serv_save/NUM.txt", "w");
-	fprintf(fp, "%d", i);
 }

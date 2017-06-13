@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 16:00:37 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/12 21:53:03 by rpassafa         ###   ########.fr       */
+/*   Updated: 2017/06/12 22:29:38 by rpassafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ const char		*audiotostr(char *audiopath);
 /*
 ** src/client
 */
-char			*receive_string(struct s_con temp);
-void 			send_voice(struct s_con temp);
+char			*receive_string(struct s_con *temp);
+void 			send_voice(struct s_con *temp);
 
 /*
 ** src/server
@@ -54,8 +54,8 @@ void 			send_voice(struct s_con temp);
 /*
 ** src/command
 */
-int				command(char *speech, struct s_con temp);
+int				command(char *speech, struct s_con *temp);
 int				find_string(char *speech, char const *targets[]);
-int				cmd_unknown(struct s_con temp);
-int				cmd_seteggtimer(struct s_con temp);
-int				cmd_showmetemps(struct s_con temp);
+int				cmd_unknown(struct s_con *temp);
+int				cmd_seteggtimer(struct s_con *temp);
+int				cmd_showmetemps(struct s_con *temp);

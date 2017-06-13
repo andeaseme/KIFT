@@ -12,8 +12,8 @@
 
 #include "kift.h"
 
-int		cmd_unknown(struct s_con temp)
+int		cmd_unknown(struct s_con *temp)
 {
-	(void)temp.sock_fd;
+	(void)temp->sock_fd;
 	return (0);
 }

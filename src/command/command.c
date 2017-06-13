@@ -28,13 +28,13 @@ static char const	*g_cmd_name[] = {
 **	Set command functions
 */
 
-int					cmd_showmetemps(struct s_con temp)
+int					cmd_showmetemps(struct s_con *temp)
 {
 	system("osx-cpu-temp");
-	return (temp.sock_fd);
+	return (temp->sock_fd);
 }
 
-static int			(*g_cmd_func[])(struct s_con temp) = {
+static int			(*g_cmd_func[])(struct s_con *temp) = {
 	&cmd_unknown,
 	&cmd_seteggtimer,
 	&cmd_seteggtimer,
@@ -60,7 +60,7 @@ int		find_string(char *speech, char const *targets[])
 **	and returns corresponding cmd_code then runs command in a fork
 */
 
-int				command(char *speech, struct s_con temp)
+int				command(char *speech, struct s_con *temp)
 {
 	int		cmd_code;
 	pid_t	f;
