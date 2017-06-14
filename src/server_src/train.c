@@ -16,5 +16,5 @@ void 	train(void)
 	asprintf(&str, "%s -moddeffn en-us/mdef.txt -ts2cbfn .ptm. -meanfn en-us/means -varfn en-us/variances -mixwfn en-us/mixture_weights -tmatfn en-us/transition_matrices -accumdir . -mapmeanfn en-us-adapt/means -mapvarfn en-us-adapt/variances -mapmixwfn en-us-adapt/mixture_weights -maptmatfn en-us-adapt/transition_matrices", MAP);
 	system(str);
 	system("mv en-us-adapt ../../ROB");
-	system("rm -rf en-us");
+	system("rm -rf en-us *.wav commands.fileids commands.transcription *.mfc NUM");
 }
