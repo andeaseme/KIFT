@@ -18,16 +18,10 @@ int		cmd_unknown(struct s_con *temp)
 	return (0);
 }
 
-int		cmd_googlesearch(struct s_con *temp)
+int		cmd_opengoogle(struct s_con *temp)
 {
-	char	*query;
-	char	*cmd;
-
-	query = strstr(temp->speech, "search ");
-	if (query)
-		query += 7;
-	printf("search query: %s\n", query);
-	asprintf(&cmd, "open https://www.google.com/search?q=%s", query);
-	system(cmd);
+	(void)temp;
+	system("./SAM/sam 'open-ing google'");
+	system("open https://www.google.com/");
 	return (0);
 }

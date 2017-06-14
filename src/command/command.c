@@ -22,8 +22,7 @@ static char const	*g_cmd_name[] = {
 	"set egg timer",
 	"set a timer",
 	"show me temps",
-	"toggle training",
-	"search",
+	"open google",
 	NULL
 };
 
@@ -36,8 +35,7 @@ static int			(*g_cmd_func[])(struct s_con *temp) = {
 	&cmd_seteggtimer,
 	&cmd_seteggtimer,
 	&cmd_showmetemps,
-	&cmd_toggletraining,
-	&cmd_googlesearch
+	&cmd_opengoogle
 };
 
 int					cmd_toggletraining(struct s_con *temp)

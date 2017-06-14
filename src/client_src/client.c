@@ -68,6 +68,7 @@ int main(int argc, char **argv)
 	struct s_con 	*temp;
 	int				correct;
 	char			buff;
+	char			cmd[1024];
 
 	if (1 < argc && 0 == strcmp(argv[1], "-t"))
 	{
@@ -81,6 +82,16 @@ int main(int argc, char **argv)
 	ft_putstr("correct? [y/n]");
 	read(0, &buff, sizeof(char));
 	correct = (buff == 'y') ? 1 : 0;
+	read(1, &buff, sizeof(char)); //won't fgets below without this
+	if (!correct)
+	{
+		free(temp->speech);
+		ft_putstr("Type what you said: ");
+		fgets(cmd, 1024, stdin);
+		temp->speech = ft_strdup(cmd);
+		printf("New command: %s\n", temp->speech);
+		correct = 1;
+	}
 	write(temp->sock_fd, &correct, sizeof(int));
 	command(temp->speech, temp);
 	free(temp->speech);

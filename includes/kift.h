@@ -23,6 +23,7 @@
 #include <time.h>
 #include <stdbool.h>
 #include "libft.h"
+#include "get_next_line.h"
 
 #define BW			"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/bw"
 
@@ -68,5 +69,5 @@ int				cmd_unknown(struct s_con *temp);
 int				cmd_seteggtimer(struct s_con *temp);
 int				cmd_showmetemps(struct s_con *temp);
 int				cmd_toggletraining(struct s_con *temp);
-int				cmd_googlesearch(struct s_con *temp);
+int				cmd_opengoogle(struct s_con *temp);
 
