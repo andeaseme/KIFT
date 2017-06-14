@@ -6,7 +6,7 @@
 #    By: aphan <aphan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/24 17:12:26 by aphan             #+#    #+#              #
-#    Updated: 2017/06/13 20:18:06 by rpassafa         ###   ########.fr        #
+#    Updated: 2017/06/13 21:03:47 by rmatos           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ OBJ :=	$(addprefix $(ODIR)/,$(_OBJ))
 _C_OBJ =	client.o command.o set_egg_timer.o cmd1.o
 C_OBJ :=	$(addprefix $(ODIR)/,$(_C_OBJ))
 
-_S_OBJ =	server.o audiotostr.o
+_S_OBJ =	server.o audiotostr.o train.o
 S_OBJ :=	$(addprefix $(ODIR)/,$(_S_OBJ))
 
 all: $(NAME)
