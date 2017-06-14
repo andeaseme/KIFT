@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 00:22:58 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/13 17:26:42 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/13 20:15:37 by rpassafa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,9 @@ int main()
 		}
 		else
 		{
+			fp = fopen ("./Train_src/serv_save/NUM", "r");
+			fscanf (fp, "%d", &i);
+			fclose(fp);
 			wait(&fstatus);
 			if (WIFSIGNALED(fstatus))
 				handle_signal(fstatus);

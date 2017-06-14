@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aphan <aphan@student.42.us.org>            +#+  +:+       +#+         #
+#    By: aphan <aphan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/24 17:12:26 by aphan             #+#    #+#              #
-#    Updated: 2017/06/07 15:56:21 by aphan            ###   ########.fr        #
+#    Updated: 2017/06/13 20:18:06 by rpassafa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,8 +75,9 @@ clean:
 		/bin/rm -rfv $(ODIR)
 		@echo '$@ $(NAME) $(ODIR)'
 		$(MAKE) -C $(LDIR) $@
+		rm -rf Train_src/serv_save
 
-fclean: clean
+ean: clean
 		/bin/rm -f $(NAME)
 		@echo '$< $(NAME)'
 		$(MAKE) -C $(LDIR) $@
