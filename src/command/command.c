@@ -38,21 +38,6 @@ static int			(*g_cmd_func[])(struct s_con *temp) = {
 	&cmd_opengoogle
 };
 
-int					cmd_toggletraining(struct s_con *temp)
-{
-	(void)temp;
-	g_training--;
-	printf("training mode set to: %s\n", g_training ? "TRUE" : "FALSE");
-	return (0);
-}
-
-int					cmd_showmetemps(struct s_con *temp)
-{
-	(void)temp;
-	system("osx-cpu-temp");
-	return (0);
-}
-
 int		find_string(char *speech, char const *targets[])
 {
 	int		i;

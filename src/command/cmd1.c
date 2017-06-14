@@ -14,7 +14,8 @@
 
 int		cmd_unknown(struct s_con *temp)
 {
-	(void)temp->sock_fd;
+	printf("invalid command: %s\n", temp->speech);
+	system("./SAM/sam 'invalid command'");
 	return (0);
 }
 
@@ -23,5 +24,12 @@ int		cmd_opengoogle(struct s_con *temp)
 	(void)temp;
 	system("./SAM/sam 'open-ing google'");
 	system("open https://www.google.com/");
+	return (0);
+}
+
+int					cmd_showmetemps(struct s_con *temp)
+{
+	(void)temp;
+	system("osx-cpu-temp");
 	return (0);
 }
