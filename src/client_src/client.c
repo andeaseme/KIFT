@@ -12,6 +12,8 @@
 
 #include "kift.h"
 
+bool	g_training = 0;
+
 void	error(char *msg)
 {
 	perror(msg);
@@ -57,19 +59,21 @@ char	*receive_string(struct s_con *temp)
 	read(temp->sock_fd, &len, sizeof(uint32_t));
 	bytes_read = read(temp->sock_fd, &buff, len * (sizeof(char)));
 	buff[bytes_read] = '\0';
-	// printf("%s\n", "test");
-	// printf("%s\n", buff);
-	// printf("%s\n", "test");
+	printf("received string: %s\n", buff);
 	return (ft_strdup(buff));
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
 	char	*speech = NULL;
 	struct s_con 	*temp;
 	int				correct;
 	char			buff;
 
+	if (1 < argc && 0 == strcmp(argv[1], "-t"))
+	{
+		g_training = 1;
+	}
 	temp = (struct s_con*)malloc(sizeof(struct s_con));
 	system("rm -rf *.wav");
 	send_voice(temp);

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "kift.h"
+extern bool			g_training;
 
 /*
 **	Set keywords
@@ -21,6 +22,7 @@ static char const	*g_cmd_name[] = {
 	"set egg timer",
 	"set a timer",
 	"show me temps",
+	"toggle training",
 	NULL
 };
 
@@ -28,18 +30,28 @@ static char const	*g_cmd_name[] = {
 **	Set command functions
 */
 
-int					cmd_showmetemps(struct s_con *temp)
-{
-	system("osx-cpu-temp");
-	return (temp->sock_fd);
-}
-
 static int			(*g_cmd_func[])(struct s_con *temp) = {
 	&cmd_unknown,
 	&cmd_seteggtimer,
 	&cmd_seteggtimer,
-	&cmd_showmetemps
+	&cmd_showmetemps,
+	&cmd_toggletraining
 };
+
+int					cmd_toggletraining(struct s_con *temp)
+{
+	(void)temp;
+	g_training--;
+	printf("training mode set to: %s\n", g_training ? "TRUE" : "FALSE");
+	return (0);
+}
+
+int					cmd_showmetemps(struct s_con *temp)
+{
+	(void)temp;
+	system("osx-cpu-temp");
+	return (0);
+}
 
 int		find_string(char *speech, char const *targets[])
 {

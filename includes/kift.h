@@ -21,6 +21,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <time.h>
+#include <stdbool.h>
 #include "libft.h"
 
 #define BW			"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/bw"
@@ -65,3 +66,4 @@ int				find_string(char *speech, char const *targets[]);
 int				cmd_unknown(struct s_con *temp);
 int				cmd_seteggtimer(struct s_con *temp);
 int				cmd_showmetemps(struct s_con *temp);
+int				cmd_toggletraining(struct s_con *temp);

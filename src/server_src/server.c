@@ -60,7 +60,7 @@ int main()
 		mkdir("./Train_src/serv_save/", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	if (lstat("./Train_src/serv_save/NUM", NULL) != -1)
 	{
-		fp = fopen ("./Train_src/serv_save/NUM.txt", "r");
+		fp = fopen ("./Train_src/serv_save/NUM", "r");
 		fscanf (fp, "%d", &i);
 		fclose(fp);
 	}
@@ -87,25 +87,24 @@ int main()
 			command = audiotostr("new_wav.wav");
 			send_string(command ? (char*)command : "ERROR", comm_fd);
 			read(comm_fd, &correct, sizeof(int));
-			if (correct)
+			if (command && *command && correct)
 			{
 				char *str;
 				asprintf(&str, "cp new_wav.wav ./Train_src/serv_save/audio_%i.wav", i);
 				system(str);
 				fp = fopen("./Train_src/serv_save/commands.transcription", "ab+");
-				fprintf(fp, "<s> %s </s> (audio_%i)\n", (command) ? command : "ERROR", i);
+				fprintf(fp, "<s> %s </s> (audio_%i)\n", command, i);
 				fclose(fp);
 				fp = fopen("./Train_src/serv_save/commands.fileids", "ab+");
 				fprintf(fp, "audio_%i\n", i);
 				fclose(fp);
 				i++;
-				fp = fopen ("./Train_src/serv_save/NUM.txt", "w");
+				fp = fopen ("./Train_src/serv_save/NUM", "w");
 				fprintf(fp, "%d", i);
 				fclose(fp);
+				exit(0);
 			}
-			if (NULL == command || 0 == *command)
-				exit(1);
-			exit(0);
+			exit(1);
 		}
 		else if (-1 == f)
 		{
