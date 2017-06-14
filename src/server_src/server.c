@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 00:22:58 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/12 22:34:40 by rpassafa         ###   ########.fr       */
+/*   Updated: 2017/06/13 17:26:42 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int main()
 	const char *command;
 	pid_t		f;
 	int			fstatus;
+	int			correct;
 
 	i = 0;
 	if (lstat("./Train_src/serv_save/", NULL) == -1)
@@ -85,6 +86,23 @@ int main()
 			system("chmod 777 new_wav.wav");
 			command = audiotostr("new_wav.wav");
 			send_string(command ? (char*)command : "ERROR", comm_fd);
+			read(comm_fd, &correct, sizeof(int));
+			if (correct)
+			{
+				char *str;
+				asprintf(&str, "cp new_wav.wav ./Train_src/serv_save/audio_%i.wav", i);
+				system(str);
+				fp = fopen("./Train_src/serv_save/commands.transcription", "ab+");
+				fprintf(fp, "<s> %s </s> (audio_%i)\n", (command) ? command : "ERROR", i);
+				fclose(fp);
+				fp = fopen("./Train_src/serv_save/commands.fileids", "ab+");
+				fprintf(fp, "audio_%i\n", i);
+				fclose(fp);
+				i++;
+				fp = fopen ("./Train_src/serv_save/NUM.txt", "w");
+				fprintf(fp, "%d", i);
+				fclose(fp);
+			}
 			if (NULL == command || 0 == *command)
 				exit(1);
 			exit(0);
@@ -102,12 +120,6 @@ int main()
 				handle_signal(fstatus);
 			else if (WIFEXITED(fstatus) && 0 == fstatus)
 			{
-				printf("saving audio file\n");
-				system(ft_strjoin("cp new_wav.wav ./Train_src/serv_save/audio_", ft_itoa(i)));
-				i++;
-				fp = fopen ("./Train_src/serv_save/NUM.txt", "w");
-				fprintf(fp, "%d", i);
-				fclose(fp);
 				close(comm_fd);
 			}
 		}

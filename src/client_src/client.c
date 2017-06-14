@@ -6,7 +6,7 @@
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 19:50:38 by bschroed          #+#    #+#             */
-/*   Updated: 2017/06/12 22:34:43 by rpassafa         ###   ########.fr       */
+/*   Updated: 2017/06/13 17:27:26 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,17 @@ int main(void)
 {
 	char	*speech = NULL;
 	struct s_con 	*temp;
+	int				correct;
+	char			buff;
 
 	temp = (struct s_con*)malloc(sizeof(struct s_con));
 	system("rm -rf *.wav");
 	send_voice(temp);
 	printf("%s\n", speech = receive_string(temp));
+	ft_putstr("correct? [y/n]");
+	read(0, &buff, sizeof(char));
+	correct = (buff == 'y') ? 1 : 0;
+	write(temp->sock_fd, &correct, sizeof(int));
 	command(speech, temp);
 	free(speech);
 	return (0);
