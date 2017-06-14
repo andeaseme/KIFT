@@ -39,8 +39,9 @@
 
 struct s_con
 {
-	int sock_fd;
-	struct sockaddr_in servaddr;
+	int					sock_fd;
+	struct sockaddr_in	servaddr;
+	char				*speech;
 };
 
 /*
@@ -67,3 +68,5 @@ int				cmd_unknown(struct s_con *temp);
 int				cmd_seteggtimer(struct s_con *temp);
 int				cmd_showmetemps(struct s_con *temp);
 int				cmd_toggletraining(struct s_con *temp);
+int				cmd_googlesearch(struct s_con *temp);
+

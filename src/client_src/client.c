@@ -65,7 +65,6 @@ char	*receive_string(struct s_con *temp)
 
 int main(int argc, char **argv)
 {
-	char	*speech = NULL;
 	struct s_con 	*temp;
 	int				correct;
 	char			buff;
@@ -75,14 +74,15 @@ int main(int argc, char **argv)
 		g_training = 1;
 	}
 	temp = (struct s_con*)malloc(sizeof(struct s_con));
+	temp->speech = NULL;
 	system("rm -rf *.wav");
 	send_voice(temp);
-	printf("%s\n", speech = receive_string(temp));
+	printf("%s\n", temp->speech = receive_string(temp));
 	ft_putstr("correct? [y/n]");
 	read(0, &buff, sizeof(char));
 	correct = (buff == 'y') ? 1 : 0;
 	write(temp->sock_fd, &correct, sizeof(int));
-	command(speech, temp);
-	free(speech);
+	command(temp->speech, temp);
+	free(temp->speech);
 	return (0);
 }

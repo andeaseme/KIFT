@@ -33,14 +33,14 @@ SPHINXFLAGS =	-DMODELDIR=\"`pkg-config --variable=modeldir pocketsphinx`\" \
 LIBFT =	-L $(LDIR) -lft
 DEPS =	$(IDIR)/kift.h
 
-_OBJ =	command.o set_egg_timer.o unknown_command.o \
+_OBJ =	command.o set_egg_timer.o cmd1.o \
 		audiotostr.o \
 		client.o \
 		server.o
 OBJ :=	$(addprefix $(ODIR)/,$(_OBJ))
 
 
-_C_OBJ =	client.o command.o set_egg_timer.o unknown_command.o
+_C_OBJ =	client.o command.o set_egg_timer.o cmd1.o
 C_OBJ :=	$(addprefix $(ODIR)/,$(_C_OBJ))
 
 _S_OBJ =	server.o audiotostr.o
@@ -77,7 +77,7 @@ clean:
 		$(MAKE) -C $(LDIR) $@
 		rm -rf Train_src/serv_save
 
-ean: clean
+fclean: clean
 		/bin/rm -f $(NAME)
 		@echo '$< $(NAME)'
 		$(MAKE) -C $(LDIR) $@

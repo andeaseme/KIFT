@@ -17,3 +17,17 @@ int		cmd_unknown(struct s_con *temp)
 	(void)temp->sock_fd;
 	return (0);
 }
+
+int		cmd_googlesearch(struct s_con *temp)
+{
+	char	*query;
+	char	*cmd;
+
+	query = strstr(temp->speech, "search ");
+	if (query)
+		query += 7;
+	printf("search query: %s\n", query);
+	asprintf(&cmd, "https://www.google.com/search?q=%s", query);
+	system(cmd);
+	return (0);
+}

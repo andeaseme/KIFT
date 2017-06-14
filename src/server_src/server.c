@@ -114,14 +114,14 @@ int main()
 		}
 		else
 		{
-			fp = fopen ("./Train_src/serv_save/NUM", "r");
-			fscanf (fp, "%d", &i);
-			fclose(fp);
 			wait(&fstatus);
 			if (WIFSIGNALED(fstatus))
 				handle_signal(fstatus);
 			else if (WIFEXITED(fstatus) && 0 == fstatus)
 			{
+				fp = fopen ("./Train_src/serv_save/NUM", "r");
+				fscanf (fp, "%d", &i);
+				fclose(fp);
 				close(comm_fd);
 			}
 		}
