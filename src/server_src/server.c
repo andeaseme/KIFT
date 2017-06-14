@@ -32,15 +32,6 @@ static void		handle_signal(int status)
 	RESET;
 }
 
-void 	send_string(char *str, int comm_fd)
-{
-	uint32_t len;
-
-	len = strlen(str);
-	write(comm_fd, &len, sizeof(uint32_t));
-	write(comm_fd, str, sizeof(char) * len);
-}
-
 int main()
 {
 	int listen_fd, comm_fd = -1;
@@ -50,10 +41,10 @@ int main()
 	void *data;
 	int wav_fd;
 	long size;
-	const char *command;
-	pid_t		f;
-	int			fstatus;
-	int			correct;
+	pid_t			f;
+	int				fstatus;
+	int				correct;
+	struct s_con	*temp = calloc(1, sizeof(struct s_con));
 
 	i = 0;
 	if (lstat("./Train_src/serv_save/", NULL) == -1)
@@ -66,9 +57,9 @@ int main()
 	}
 	listen_fd = socket(AF_INET, SOCK_STREAM, 0);
 	bzero( &servaddr, sizeof(servaddr));
-	servaddr.sin_family = AF_INET;
-	servaddr.sin_addr.s_addr = htons(INADDR_ANY);
-	servaddr.sin_port = htons(22005);
+	temp->servaddr.sin_family = AF_INET;
+	temp->servaddr.sin_addr.s_addr = htons(INADDR_ANY);
+	temp->servaddr.sin_port = htons(22000);
     bind(listen_fd, (struct sockaddr *) &servaddr, sizeof(servaddr));
 	while (1)
 	{
@@ -84,16 +75,31 @@ int main()
 			read(comm_fd, data, size);
 			write(wav_fd, data, size);
 			system("chmod 777 new_wav.wav");
-			command = audiotostr("new_wav.wav");
-			send_string(command ? (char*)command : "ERROR", comm_fd);
+			temp->speech = audiotostr("new_wav.wav");
+			send_string(temp->speech ? temp->speech : "ERROR", comm_fd);
 			read(comm_fd, &correct, sizeof(int));
-			if (command && *command && correct)
+			if (!correct)
 			{
+				ft_putendl("HERE SETTING!");
+				printf("setting server info...\n");				
+				temp->sock_fd = comm_fd;
+				temp->servaddr = servaddr;
+				ft_putendl("HERE RECEIVING!");
+				printf("receiving corrected string...\n");
+				temp->speech = receive_string(temp);
+				ft_putendl("HERE RECEIVED!");
+				printf("received string: %s\n", temp->speech);
+				
+			}
+			if (temp->speech && *temp->speech)
+			{
+				ft_putendl("HERE SAVING!");
+				printf("saving training audio...\n");
 				char *str;
 				asprintf(&str, "cp new_wav.wav ./Train_src/serv_save/audio_%i.wav", i);
 				system(str);
 				fp = fopen("./Train_src/serv_save/commands.transcription", "ab+");
-				fprintf(fp, "<s> %s </s> (audio_%i)\n", command, i);
+				fprintf(fp, "<s> %s </s> (audio_%i)\n", temp->speech, i);
 				fclose(fp);
 				fp = fopen("./Train_src/serv_save/commands.fileids", "ab+");
 				fprintf(fp, "audio_%i\n", i);

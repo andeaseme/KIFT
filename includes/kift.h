@@ -50,12 +50,11 @@ struct s_con
 /*
 ** src/speech_recognition
 */
-const char		*audiotostr(char *audiopath);
+char		*audiotostr(char *audiopath);
 
 /*
 ** src/client
 */
-char			*receive_string(struct s_con *temp);
 void 			send_voice(struct s_con *temp);
 
 /*
@@ -72,3 +71,9 @@ int				cmd_seteggtimer(struct s_con *temp);
 int				cmd_showmetemps(struct s_con *temp);
 int				cmd_opengoogle(struct s_con *temp);
 void 			train(void);
+
+/*
+** src/utility.c
+*/
+char			*receive_string(struct s_con *temp);
+void 			send_string(char *str, int comm_fd);

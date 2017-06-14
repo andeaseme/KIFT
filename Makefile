@@ -36,14 +36,15 @@ DEPS =	$(IDIR)/kift.h
 _OBJ =	command.o set_egg_timer.o cmd1.o \
 		audiotostr.o \
 		client.o \
-		server.o
+		server.o \
+		utility.o
 OBJ :=	$(addprefix $(ODIR)/,$(_OBJ))
 
 
-_C_OBJ =	client.o command.o set_egg_timer.o cmd1.o
+_C_OBJ =	client.o command.o set_egg_timer.o cmd1.o utility.o
 C_OBJ :=	$(addprefix $(ODIR)/,$(_C_OBJ))
 
-_S_OBJ =	server.o audiotostr.o train.o
+_S_OBJ =	server.o audiotostr.o train.o utility.o
 S_OBJ :=	$(addprefix $(ODIR)/,$(_S_OBJ))
 
 all: $(NAME)

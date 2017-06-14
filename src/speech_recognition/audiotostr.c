@@ -13,7 +13,7 @@
 #include "kift.h"
 #include <pocketsphinx.h>
 
-const char    *audiotostr(char *audiopath)
+char    *audiotostr(char *audiopath)
 {
     ps_decoder_t    *ps;
     cmd_ln_t        *config;
@@ -61,5 +61,5 @@ const char    *audiotostr(char *audiopath)
     cmd_ln_free_r(config);
     ps_free(ps);
     printf("audiotostr returning: '%s'\n", hyp);
-    return(hyp);
+    return(ft_strdup(hyp));
 }

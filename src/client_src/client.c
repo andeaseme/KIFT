@@ -43,24 +43,11 @@ void 	send_voice(struct s_con *temp)
 	temp->sock_fd=socket(AF_INET,SOCK_STREAM,0);
 	bzero(&temp->servaddr,sizeof (temp->servaddr));
 	temp->servaddr.sin_family=AF_INET;
-	temp->servaddr.sin_port=htons(22005);
+	temp->servaddr.sin_port=htons(22000);
 	inet_pton(AF_INET,"127.0.0.1",&(temp->servaddr.sin_addr));
 	connect(temp->sock_fd,(struct sockaddr *)&temp->servaddr,sizeof(temp->servaddr));
 	system("rec -c 1 -r 16000 -b 16 recording.wav gain +5 silence 1 0.1 3% 1 2.0 3%");
 	send_file("recording.wav", temp);
-}
-
-char	*receive_string(struct s_con *temp)
-{
-	char		buff[4096];
-	int			bytes_read;
-	uint32_t	len;
-
-	read(temp->sock_fd, &len, sizeof(uint32_t));
-	bytes_read = read(temp->sock_fd, &buff, len * (sizeof(char)));
-	buff[bytes_read] = '\0';
-	printf("received string: %s\n", buff);
-	return (ft_strdup(buff));
 }
 
 int main(int argc, char **argv)
@@ -90,9 +77,12 @@ int main(int argc, char **argv)
 		fgets(cmd, 1024, stdin);
 		temp->speech = ft_strdup(cmd);
 		printf("New command: %s\n", temp->speech);
-		correct = 1;
 	}
 	write(temp->sock_fd, &correct, sizeof(int));
+	if (!correct)
+	{
+		send_string(temp->speech, temp->sock_fd);
+	}
 	command(temp->speech, temp);
 	free(temp->speech);
 	return (0);
