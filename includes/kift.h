@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 16:00:37 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/12 22:29:38 by rpassafa         ###   ########.fr       */
+/*   Updated: 2017/06/13 21:04:00 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 #include "get_next_line.h"
 
 #define BW			"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/bw"
+#define MLLR		"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/mllr_solve"
+#define MAP 		"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/map_adapt"
 
 #define HMMDIR      "ROB"
 #define LANGDIR     "ROB/en-us.lm.bin"
@@ -69,5 +71,10 @@ int				cmd_unknown(struct s_con *temp);
 int				cmd_seteggtimer(struct s_con *temp);
 int				cmd_showmetemps(struct s_con *temp);
 int				cmd_toggletraining(struct s_con *temp);
+<<<<<<< HEAD
 int				cmd_opengoogle(struct s_con *temp);
 
+=======
+int				cmd_googlesearch(struct s_con *temp);
+void 			train(void);
+>>>>>>> 1eab412fb446f33e9e19d0d9e43d4538daf3f541
