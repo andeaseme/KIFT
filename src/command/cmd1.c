@@ -27,7 +27,7 @@ int		cmd_googlesearch(struct s_con *temp)
 	if (query)
 		query += 7;
 	printf("search query: %s\n", query);
-	asprintf(&cmd, "https://www.google.com/search?q=%s", query);
+	asprintf(&cmd, "open https://www.google.com/search?q=%s", query);
 	system(cmd);
 	return (0);
 }

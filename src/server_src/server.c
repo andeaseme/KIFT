@@ -98,10 +98,6 @@ int main()
 				fp = fopen("./Train_src/serv_save/commands.fileids", "ab+");
 				fprintf(fp, "audio_%i\n", i);
 				fclose(fp);
-				i++;
-				fp = fopen ("./Train_src/serv_save/NUM", "w");
-				fprintf(fp, "%d", i);
-				fclose(fp);
 				exit(0);
 			}
 			exit(1);
@@ -119,11 +115,12 @@ int main()
 				handle_signal(fstatus);
 			else if (WIFEXITED(fstatus) && 0 == fstatus)
 			{
-				fp = fopen ("./Train_src/serv_save/NUM", "r");
-				fscanf (fp, "%d", &i);
+				i++;
+				fp = fopen ("./Train_src/serv_save/NUM", "w");
+				fprintf(fp, "%d", i);
 				fclose(fp);
-				close(comm_fd);
 			}
+			close(comm_fd);
 		}
 	}
 }
