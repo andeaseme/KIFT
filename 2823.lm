@@ -1,0 +1,72 @@
+Language model created by QuickLM on Wed Jun 14 18:25:02 EDT 2017
+Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
+
+The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
+
+The code that was used to produce this language model is available in Open Source.
+Please visit http://www.speech.cs.cmu.edu/tools/ for more information
+
+The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
+This model based on a corpus of 6 sentences and 15 words
+
+\data\
+ngram 1=15
+ngram 2=19
+ngram 3=15
+
+\1-grams:
+-0.9700 </s> -0.3010
+-0.9700 <s> -0.2518
+-1.7482 E-MAIL -0.2518
+-1.7482 EGG -0.2932
+-1.7482 GOOGLE -0.2518
+-1.4472 ME -0.2852
+-1.7482 MUSIC -0.2932
+-1.4472 OPEN -0.2852
+-1.7482 PLAYER -0.2518
+-1.7482 SEND -0.2932
+-1.7482 SET -0.2932
+-1.4472 SHOW -0.2852
+-1.7482 TEMPERATURES -0.2518
+-1.7482 TEMPS -0.2518
+-1.7482 TIMER -0.2518
+
+\2-grams:
+-0.7782 <s> OPEN 0.0000
+-1.0792 <s> SEND 0.0000
+-1.0792 <s> SET 0.0000
+-0.7782 <s> SHOW 0.0000
+-0.3010 E-MAIL </s> -0.3010
+-0.3010 EGG TIMER 0.0000
+-0.3010 GOOGLE </s> -0.3010
+-0.6021 ME TEMPERATURES 0.0000
+-0.6021 ME TEMPS 0.0000
+-0.3010 MUSIC PLAYER 0.0000
+-0.6021 OPEN GOOGLE 0.0000
+-0.6021 OPEN MUSIC 0.0000
+-0.3010 PLAYER </s> -0.3010
+-0.3010 SEND E-MAIL 0.0000
+-0.3010 SET EGG 0.0000
+-0.3010 SHOW ME 0.0000
+-0.3010 TEMPERATURES </s> -0.3010
+-0.3010 TEMPS </s> -0.3010
+-0.3010 TIMER </s> -0.3010
+
+\3-grams:
+-0.6021 <s> OPEN GOOGLE
+-0.6021 <s> OPEN MUSIC
+-0.3010 <s> SEND E-MAIL
+-0.3010 <s> SET EGG
+-0.3010 <s> SHOW ME
+-0.3010 EGG TIMER </s>
+-0.3010 ME TEMPERATURES </s>
+-0.3010 ME TEMPS </s>
+-0.3010 MUSIC PLAYER </s>
+-0.3010 OPEN GOOGLE </s>
+-0.3010 OPEN MUSIC PLAYER
+-0.3010 SEND E-MAIL </s>
+-0.3010 SET EGG TIMER
+-0.6021 SHOW ME TEMPERATURES
+-0.6021 SHOW ME TEMPS
+
+\end\
