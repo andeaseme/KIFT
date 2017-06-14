@@ -14,17 +14,14 @@
 
 int			cmd_seteggtimer(struct s_con *temp)
 {
-	// char const	*targets[] = {"hard", "soft", NULL};
-	// char		*speech;
 	clock_t		time;
 	clock_t		start;
 
+	(void)temp;
 	start = clock();
-	time = 5000000;
-	if (temp)
-		;
+	time = 8 * 60 * CLOCKS_PER_SEC;
 	printf("eight minute timer set\n");
-	system("./SAM/sam 'Eight minute timer set'");
+	system("./SAM/sam 'Eight min-ut timer set'");
 	while (time > clock() - start)
 	;
 	printf("your egg is ready!\n");
