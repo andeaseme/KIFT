@@ -70,11 +70,5 @@ int				find_string(char *speech, char const *targets[]);
 int				cmd_unknown(struct s_con *temp);
 int				cmd_seteggtimer(struct s_con *temp);
 int				cmd_showmetemps(struct s_con *temp);
-int				cmd_toggletraining(struct s_con *temp);
-<<<<<<< HEAD
 int				cmd_opengoogle(struct s_con *temp);
-
-=======
-int				cmd_googlesearch(struct s_con *temp);
 void 			train(void);
->>>>>>> 1eab412fb446f33e9e19d0d9e43d4538daf3f541
