@@ -12,6 +12,26 @@
 
 #include "kift.h"
 
+static void		handle_signal(int status)
+{
+	RED;
+	if (status == SIGSEGV)
+	{
+		INVERSE;
+		fprintf(stderr, "Server fork exited with SEGV\n");
+	}
+	else if (status == SIGBUS)
+	{
+		BOLD;
+		fprintf(stderr, "Server fork exited with BUSE\n");
+	}
+	else
+	{
+		fprintf(stderr, "Server fork exited with unknown signal code: %d\n", status);
+	}
+	RESET;
+}
+
 void 	send_string(char *str, int comm_fd)
 {
 	uint32_t len;
@@ -23,10 +43,16 @@ void 	send_string(char *str, int comm_fd)
 
 int main()
 {
-	int listen_fd, comm_fd;
+	int listen_fd, comm_fd = -1;
 	struct sockaddr_in servaddr;
 	int i;
 	FILE *fp;
+	void *data;
+	int wav_fd;
+	long size;
+	const char *command;
+	pid_t		f;
+	int			fstatus;
 
 	i = 0;
 	if (lstat("./Train_src/serv_save/", NULL) == -1)
@@ -45,25 +71,45 @@ int main()
     bind(listen_fd, (struct sockaddr *) &servaddr, sizeof(servaddr));
 	while (1)
 	{
-		printf("%d\n",listen(listen_fd, 10));
-		comm_fd = accept(listen_fd, (struct sockaddr*) NULL, NULL);
-		long size;
-		read(comm_fd, &size, sizeof(long));
-		printf("%li\n", (long)size);
-		int wav_fd = open("new_wav.wav", O_RDWR|O_CREAT);
-		void *data;
-		data = malloc(size);
-		read(comm_fd, data, size);
-		write(wav_fd, data, size);
-		system("chmod 777 new_wav.wav");
-		const char *command = audiotostr("new_wav.wav");
-		send_string(command ? (char*)command : "ERROR", comm_fd);
-		system(ft_strjoin("cp new_wav.wav ./Train_src/serv_save/audio_", ft_itoa(i)));
-		i++;
-		fp = fopen ("./Train_src/serv_save/NUM.txt", "w");
-		fprintf(fp, "%d", i);
-		fclose(fp);
-		close(comm_fd);
-		// system("rm -rf *.wav");s
+		f = fork();
+		if (0 == f)
+		{
+			printf("listen: %d\n",listen(listen_fd, 10));
+			comm_fd = accept(listen_fd, (struct sockaddr*) NULL, NULL);
+			read(comm_fd, &size, sizeof(long));
+			printf("read size: %li\n", size);
+			wav_fd = open("new_wav.wav", O_RDWR|O_CREAT);
+			data = malloc(size);
+			read(comm_fd, data, size);
+			write(wav_fd, data, size);
+			system("chmod 777 new_wav.wav");
+			command = audiotostr("new_wav.wav");
+			send_string(command ? (char*)command : "ERROR", comm_fd);
+			if (NULL == command || 0 == *command)
+				exit(1);
+			exit(0);
+		}
+		else if (-1 == f)
+		{
+			RED;
+			fprintf(stderr, "Server failed to fork.\n");
+			RESET;
+		}
+		else
+		{
+			wait(&fstatus);
+			if (WIFSIGNALED(fstatus))
+				handle_signal(fstatus);
+			else if (WIFEXITED(fstatus) && 0 == fstatus)
+			{
+				printf("saving audio file\n");
+				system(ft_strjoin("cp new_wav.wav ./Train_src/serv_save/audio_", ft_itoa(i)));
+				i++;
+				fp = fopen ("./Train_src/serv_save/NUM.txt", "w");
+				fprintf(fp, "%d", i);
+				fclose(fp);
+				close(comm_fd);
+			}
+		}
 	}
 }

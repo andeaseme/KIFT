@@ -30,12 +30,18 @@
 #define DICTDIR     "ROB/cmudict-en-us.dict"
 #define READ_SIZE   2048
 
+# define RESET write(1, "\x1b[0m", 4)
+# define GREEN write(1, "\x1b[32m", 5)
+# define RED write(1, "\x1b[31m", 5)
+# define INVERSE write(1, "\x1b[7m", 4)
+# define BOLD write(1, "\x1b[1m", 4)
 
 struct s_con
 {
 	int sock_fd;
 	struct sockaddr_in servaddr;
 };
+
 /*
 ** src/speech_recognition
 */
