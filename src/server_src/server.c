@@ -93,21 +93,45 @@ void	server_save_command_data(char *command, int audio_count)
 	fclose(fp);
 }
 
+int		increment_audio_count(int ac)
+{
+	FILE *fp;
+	
+	ac++;
+	fp = fopen ("./Train_src/serv_save/NUM", "w");
+	fprintf(fp, "%d", ac);
+	fclose(fp);
+	printf("audio count: %i\n", ac);
+	return (ac);
+}
+
+void	receive_file(int comm_fd)
+{
+	long	size;
+	void	*data;
+	int		wav_fd;
+
+	read(comm_fd, &size, sizeof(long));
+	printf("read size: %li\n", size);
+	wav_fd = open("new_wav.wav", O_RDWR|O_CREAT);
+	data = malloc(size);
+	read(comm_fd, data, size);
+	write(wav_fd, data, size);
+	system("chmod 777 new_wav.wav");
+}
+
 int main()
 {
-	int					comm_fd = -1;
-	int i;
-	FILE *fp;
-	void *data;
-	int wav_fd;
-	long size;
-	pid_t		f;
-	int			fstatus;
-	int			correct;
+	int				comm_fd;
+	int				i;
+	pid_t			f;
+	int				fstatus;
+	int				correct;
 	struct s_con	*conn;
 
 	i = init_server_save();
 	conn = init_server();
+	comm_fd = 0;
 	while (1)
 	{
 		f = fork();
@@ -115,16 +139,18 @@ int main()
 		{
 			printf("listen: %d\n",listen(conn->sock_fd, 10));
 			comm_fd = accept(conn->sock_fd, (struct sockaddr*) NULL, NULL);
-			read(comm_fd, &size, sizeof(long));
-			printf("read size: %li\n", size);
-			wav_fd = open("new_wav.wav", O_RDWR|O_CREAT);
-			data = malloc(size);
-			read(comm_fd, data, size);
-			write(wav_fd, data, size);
-			system("chmod 777 new_wav.wav");
+			receive_file(comm_fd);
+			// read(comm_fd, &size, sizeof(long));
+			// printf("read size: %li\n", size);
+			// wav_fd = open("new_wav.wav", O_RDWR|O_CREAT);
+			// data = malloc(size);
+			// read(comm_fd, data, size);
+			// write(wav_fd, data, size);
+			// system("chmod 777 new_wav.wav");
 			conn->speech = audiotostr("new_wav.wav");
 			send_string(conn->speech ? conn->speech : "ERROR", comm_fd);
 			read(comm_fd, &correct, sizeof(int));
+			close(comm_fd);
 			if (conn->speech && *conn->speech && correct)
 			{
 				server_save_command_data(conn->speech, i);
@@ -144,14 +170,7 @@ int main()
 			if (WIFSIGNALED(fstatus))
 				handle_signal(fstatus);
 			else if (WIFEXITED(fstatus) && 0 == fstatus)
-			{
-				i++;
-				fp = fopen ("./Train_src/serv_save/NUM", "w");
-				fprintf(fp, "%d", i);
-				fclose(fp);
-				printf("audio count: %i\n", i);
-			}
-			close(comm_fd);
+				i = increment_audio_count(i);
 		}
 	}
 }
