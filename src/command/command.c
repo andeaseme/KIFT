@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:49:45 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/12 21:55:57 by rpassafa         ###   ########.fr       */
+/*   Updated: 2017/06/14 20:07:57 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ extern bool			g_training;
 
 static char const	*g_cmd_name[] = {
 	"unknown command",
-	"set egg timer",
-	"set a timer",
-	"show me temps",
-	"toggle training",
-	"search",
+	"SET EGG TIMER",
+	"SHOW ME TEMPS",
+	"SHOW ME TEMPERATURES",
+	"GOOGLE",
+	"OPEN GOOGLE MUSIC",
+	"OPEN MUSIC PLAYER",
+	"SEND E-MAIL",
 	NULL
 };
 
@@ -31,14 +33,30 @@ static char const	*g_cmd_name[] = {
 **	Set command functions
 */
 
+int					cmd_googlemusic(struct s_con *temp)
+{
+	(void)temp;
+	system("open https://music.google.com/");
+	return (0);
+}
+
 static int			(*g_cmd_func[])(struct s_con *temp) = {
 	&cmd_unknown,
 	&cmd_seteggtimer,
-	&cmd_seteggtimer,
 	&cmd_showmetemps,
-	&cmd_toggletraining,
-	&cmd_googlesearch
+	&cmd_showmetemps,
+	&cmd_googlesearch,
+	&cmd_googlemusic,
+	&cmd_googlemusic,
+	&cmd_sendemail,
 };
+
+int					cmd_sendemail(struct s_con *temp)
+{
+	(void)temp;
+	system("open https://gmail.com");
+	return (0);
+}
 
 int					cmd_toggletraining(struct s_con *temp)
 {
@@ -62,7 +80,7 @@ int		find_string(char *speech, char const *targets[])
 	i = 0;
 	while (g_cmd_name[i])
 	{
-		if (NULL != strstr(speech, targets[i]))
+		if (ft_strequ(targets[i], speech))
 			return (i);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 16:00:37 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/14 16:38:53 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/14 20:07:04 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,6 @@ int				cmd_seteggtimer(struct s_con *temp);
 int				cmd_showmetemps(struct s_con *temp);
 int				cmd_toggletraining(struct s_con *temp);
 int				cmd_googlesearch(struct s_con *temp);
+int				cmd_googlemusic(struct s_con *temp);
+int				cmd_sendemail(struct s_con *temp);
 void 			train(void);
