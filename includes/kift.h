@@ -24,22 +24,22 @@
 #include <stdbool.h>
 #include "libft.h"
 
-#define SERVER_PORT	22005
+# define SERVER_PORT	22005
 
-#define BW			"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/bw"
-#define MLLR		"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/mllr_solve"
-#define MAP 		"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/map_adapt"
+# define BW				"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/bw"
+# define MLLR			"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/mllr_solve"
+# define MAP 			"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/map_adapt"
 
-#define HMMDIR      "ROB"
-#define LANGDIR     "2823.lm"
-#define DICTDIR     "2823.dic"
-#define READ_SIZE   2048
+# define HMMDIR			"ROB"
+# define LANGDIR		"2823.lm"
+# define DICTDIR		"2823.dic"
+# define READ_SIZE		2048
 
-# define RESET write(1, "\x1b[0m", 4)
-# define GREEN write(1, "\x1b[32m", 5)
-# define RED write(1, "\x1b[31m", 5)
-# define INVERSE write(1, "\x1b[7m", 4)
-# define BOLD write(1, "\x1b[1m", 4)
+# define RESET			write(1, "\x1b[0m", 4)
+# define GREEN			write(1, "\x1b[32m", 5)
+# define RED			write(1, "\x1b[31m", 5)
+# define INVERSE		write(1, "\x1b[7m", 4)
+# define BOLD			write(1, "\x1b[1m", 4)
 
 struct s_con
 {
@@ -62,6 +62,10 @@ void 			send_voice(struct s_con *temp, int port_num);
 /*
 ** src/server
 */
+void				handle_signal(int status);
+int					init_server_save(void);
+struct s_con		*init_server(int port_num);
+int					increment_audio_count(int ac);
 
 /*
 ** src/command
