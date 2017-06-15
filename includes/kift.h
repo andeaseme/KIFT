@@ -24,6 +24,8 @@
 #include <stdbool.h>
 #include "libft.h"
 
+#define SERVER_PORT	22005
+
 #define BW			"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/bw"
 #define MLLR		"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/mllr_solve"
 #define MAP 		"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/map_adapt"
@@ -49,7 +51,7 @@ struct s_con
 /*
 ** src/speech_recognition
 */
-const char		*audiotostr(char *audiopath);
+char			*audiotostr(char *audiopath);
 
 /*
 ** src/client

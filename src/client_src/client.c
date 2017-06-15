@@ -43,7 +43,7 @@ void 	send_voice(struct s_con *temp)
 	temp->sock_fd=socket(AF_INET,SOCK_STREAM,0);
 	bzero(&temp->servaddr,sizeof (temp->servaddr));
 	temp->servaddr.sin_family=AF_INET;
-	temp->servaddr.sin_port=htons(22005);
+	temp->servaddr.sin_port=htons(SERVER_PORT);
 	inet_pton(AF_INET,"127.0.0.1",&(temp->servaddr.sin_addr));
 	connect(temp->sock_fd,(struct sockaddr *)&temp->servaddr,sizeof(temp->servaddr));
 	system("rec -c 1 -r 16000 -b 16 recording.wav gain +5 silence 1 0.1 3% 1 2.0 3%");

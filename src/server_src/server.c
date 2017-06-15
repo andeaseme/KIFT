@@ -41,42 +41,80 @@ void 	send_string(char *str, int comm_fd)
 	write(comm_fd, str, sizeof(char) * len);
 }
 
-int main()
+int		init_server_save(void)
 {
-	int listen_fd, comm_fd = -1;
-	struct sockaddr_in servaddr;
-	int i;
+	int		i;
 	FILE *fp;
-	void *data;
-	int wav_fd;
-	long size;
-	const char *command;
-	pid_t		f;
-	int			fstatus;
-	int			correct;
 
 	i = 0;
 	if (lstat("./Train_src/serv_save/", NULL) == -1)
+	{
+		printf("make server save dir\n");
 		mkdir("./Train_src/serv_save/", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-	if (lstat("./Train_src/serv_save/NUM", NULL) != -1)
+	}
+	else if (lstat("./Train_src/serv_save/NUM", NULL) != -1)
 	{
 		fp = fopen ("./Train_src/serv_save/NUM", "r");
 		fscanf (fp, "%d", &i);
 		fclose(fp);
 	}
-	listen_fd = socket(AF_INET, SOCK_STREAM, 0);
-	bzero( &servaddr, sizeof(servaddr));
-	servaddr.sin_family = AF_INET;
-	servaddr.sin_addr.s_addr = htons(INADDR_ANY);
-	servaddr.sin_port = htons(22005);
-    bind(listen_fd, (struct sockaddr *) &servaddr, sizeof(servaddr));
+	printf("audio count: %i\n", i);
+	return (i);
+}
+
+struct s_con		*init_server(void)
+{
+	struct s_con	*conn;
+
+	conn = calloc(1, sizeof(*conn));
+	conn->sock_fd = socket(AF_INET, SOCK_STREAM, 0);
+	conn->servaddr.sin_family = AF_INET;
+	conn->servaddr.sin_addr.s_addr = htons(INADDR_ANY);
+	conn->servaddr.sin_port = htons(SERVER_PORT);
+    bind(conn->sock_fd,
+		(struct sockaddr *)&conn->servaddr, sizeof(conn->servaddr));
+	printf("server initialized\n");
+	return (conn);
+}
+
+void	server_save_command_data(char *command, int audio_count)
+{
+	char	*str;
+	FILE	*fp;
+
+	asprintf(&str, "cp new_wav.wav ./Train_src/serv_save/audio_%i.wav",
+		audio_count);
+	system(str);
+	fp = fopen("./Train_src/serv_save/commands.transcription", "ab+");
+	fprintf(fp, "<s> %s </s> (audio_%i)\n", command, audio_count);
+	fclose(fp);
+	fp = fopen("./Train_src/serv_save/commands.fileids", "ab+");
+	fprintf(fp, "audio_%i\n", audio_count);
+	fclose(fp);
+}
+
+int main()
+{
+	int					comm_fd = -1;
+	int i;
+	FILE *fp;
+	void *data;
+	int wav_fd;
+	long size;
+	pid_t		f;
+	int			fstatus;
+	int			correct;
+	struct s_con	*conn;
+
+	i = init_server_save();
+	conn = init_server();
 	while (1)
 	{
 		f = fork();
 		if (0 == f)
 		{
-			printf("listen: %d\n",listen(listen_fd, 10));
-			comm_fd = accept(listen_fd, (struct sockaddr*) NULL, NULL);
+			printf("listen: %d\n",listen(conn->sock_fd, 10));
+			comm_fd = accept(conn->sock_fd, (struct sockaddr*) NULL, NULL);
 			read(comm_fd, &size, sizeof(long));
 			printf("read size: %li\n", size);
 			wav_fd = open("new_wav.wav", O_RDWR|O_CREAT);
@@ -84,20 +122,12 @@ int main()
 			read(comm_fd, data, size);
 			write(wav_fd, data, size);
 			system("chmod 777 new_wav.wav");
-			command = audiotostr("new_wav.wav");
-			send_string(command ? (char*)command : "ERROR", comm_fd);
+			conn->speech = audiotostr("new_wav.wav");
+			send_string(conn->speech ? conn->speech : "ERROR", comm_fd);
 			read(comm_fd, &correct, sizeof(int));
-			if (command && *command && correct)
+			if (conn->speech && *conn->speech && correct)
 			{
-				char *str;
-				asprintf(&str, "cp new_wav.wav ./Train_src/serv_save/audio_%i.wav", i);
-				system(str);
-				fp = fopen("./Train_src/serv_save/commands.transcription", "ab+");
-				fprintf(fp, "<s> %s </s> (audio_%i)\n", command, i);
-				fclose(fp);
-				fp = fopen("./Train_src/serv_save/commands.fileids", "ab+");
-				fprintf(fp, "audio_%i\n", i);
-				fclose(fp);
+				server_save_command_data(conn->speech, i);
 				exit(0);
 			}
 			exit(1);
@@ -119,6 +149,7 @@ int main()
 				fp = fopen ("./Train_src/serv_save/NUM", "w");
 				fprintf(fp, "%d", i);
 				fclose(fp);
+				printf("audio count: %i\n", i);
 			}
 			close(comm_fd);
 		}
