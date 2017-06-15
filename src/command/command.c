@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "kift.h"
-extern bool			g_training;
 
 /*
 **	Set keywords
@@ -55,14 +54,6 @@ int					cmd_sendemail(struct s_con *temp)
 {
 	(void)temp;
 	system("open https://gmail.com");
-	return (0);
-}
-
-int					cmd_toggletraining(struct s_con *temp)
-{
-	(void)temp;
-	g_training--;
-	printf("training mode set to: %s\n", g_training ? "TRUE" : "FALSE");
 	return (0);
 }
 

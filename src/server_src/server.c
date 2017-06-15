@@ -27,9 +27,8 @@ static void		handle_signal(int status)
 	}
 	else
 	{
-		fprintf(stderr, "Server fork exited with unknown signal code: %d\n", status);
+		fprintf(stderr, "Server fork exited signal code: %d\n", status);
 	}
-	RESET;
 }
 
 void 	send_string(char *str, int comm_fd)
@@ -62,7 +61,7 @@ int		init_server_save(void)
 	return (i);
 }
 
-struct s_con		*init_server(void)
+struct s_con		*init_server(int port_num)
 {
 	struct s_con	*conn;
 
@@ -70,10 +69,10 @@ struct s_con		*init_server(void)
 	conn->sock_fd = socket(AF_INET, SOCK_STREAM, 0);
 	conn->servaddr.sin_family = AF_INET;
 	conn->servaddr.sin_addr.s_addr = htons(INADDR_ANY);
-	conn->servaddr.sin_port = htons(SERVER_PORT);
+	conn->servaddr.sin_port = htons(port_num);
     bind(conn->sock_fd,
 		(struct sockaddr *)&conn->servaddr, sizeof(conn->servaddr));
-	printf("server initialized\n");
+	printf("server initialized to port: %i\n", port_num);
 	return (conn);
 }
 
@@ -120,44 +119,40 @@ void	receive_file(int comm_fd)
 	system("chmod 777 new_wav.wav");
 }
 
-int main()
+void	server_fork(struct s_con *conn, int audio_count)
 {
-	int				comm_fd;
+	int		comm_fd;
+	int		correct;
+	
+	printf("listen: %d\n",listen(conn->sock_fd, 10));
+	comm_fd = accept(conn->sock_fd, (struct sockaddr*) NULL, NULL);
+	receive_file(comm_fd);
+	conn->speech = audiotostr("new_wav.wav");
+	send_string(conn->speech ? conn->speech : "ERROR", comm_fd);
+	read(comm_fd, &correct, sizeof(int));
+	close(comm_fd);
+	if (conn->speech && *conn->speech && correct)
+	{
+		server_save_command_data(conn->speech, audio_count);
+		exit(0);
+	}
+	exit(1);
+}
+
+int main(int argc, char **argv)
+{
 	int				i;
 	pid_t			f;
 	int				fstatus;
-	int				correct;
 	struct s_con	*conn;
 
 	i = init_server_save();
-	conn = init_server();
-	comm_fd = 0;
+	conn = init_server(argc > 1 ? atoi(argv[1]) : SERVER_PORT);
 	while (1)
 	{
 		f = fork();
 		if (0 == f)
-		{
-			printf("listen: %d\n",listen(conn->sock_fd, 10));
-			comm_fd = accept(conn->sock_fd, (struct sockaddr*) NULL, NULL);
-			receive_file(comm_fd);
-			// read(comm_fd, &size, sizeof(long));
-			// printf("read size: %li\n", size);
-			// wav_fd = open("new_wav.wav", O_RDWR|O_CREAT);
-			// data = malloc(size);
-			// read(comm_fd, data, size);
-			// write(wav_fd, data, size);
-			// system("chmod 777 new_wav.wav");
-			conn->speech = audiotostr("new_wav.wav");
-			send_string(conn->speech ? conn->speech : "ERROR", comm_fd);
-			read(comm_fd, &correct, sizeof(int));
-			close(comm_fd);
-			if (conn->speech && *conn->speech && correct)
-			{
-				server_save_command_data(conn->speech, i);
-				exit(0);
-			}
-			exit(1);
-		}
+			server_fork(conn, i);
 		else if (-1 == f)
 		{
 			RED;
