@@ -36,14 +36,8 @@ void 	 send_file(char *filename, struct s_con *conn)
 	close(fd);
 }
 
-void 	send_voice(struct s_con *conn, int port_num)
+void 	send_voice(struct s_con *conn)
 {
-	printf("sending voice through port: %i\n", port_num);
-	conn->sock_fd=socket(AF_INET,SOCK_STREAM,0);
-	bzero(&conn->servaddr,sizeof (conn->servaddr));
-	conn->servaddr.sin_family=AF_INET;
-	conn->servaddr.sin_port=htons(port_num);
-	inet_pton(AF_INET,"127.0.0.1",&(conn->servaddr.sin_addr));
 	connect(conn->sock_fd,(struct sockaddr *)&conn->servaddr,sizeof(conn->servaddr));
 	system("rec -c 1 -r 16000 -b 16 recording.wav gain +5 silence 1 0.1 3% 1 2.0 3%");
 	send_file("recording.wav", conn);
@@ -62,18 +56,33 @@ char	*receive_string(struct s_con *conn)
 	return (ft_strdup(buff));
 }
 
+void	conversation(struct s_con *conn, int port_num)
+{
+	int				ret;
+	
+	system("rm -rf *.wav");
+	printf("sending voice through port: %i\n", port_num);	
+	send_voice(conn);
+	printf("%s\n", conn->speech = receive_string(conn));
+	ret = command(conn->speech, conn);
+	write(conn->sock_fd, &ret, sizeof(int));
+	free(conn->speech);
+	if (0 != ret)
+		conversation(conn, port_num);
+}
+
 int main(int argc, char **argv)
 {
 	struct s_con 	*conn;
-	int				correct;
+	int				port_num;
 
 	conn = (struct s_con*)malloc(sizeof(struct s_con));
 	conn->speech = NULL;
-	system("rm -rf *.wav");
-	send_voice(conn, argc > 1 ? atoi(argv[1]) : SERVER_PORT);
-	printf("%s\n", conn->speech = receive_string(conn));
-	correct = command(conn->speech, conn);
-	write(conn->sock_fd, &correct, sizeof(int));
-	free(conn->speech);
+	conn->sock_fd=socket(AF_INET,SOCK_STREAM,0);
+	bzero(&conn->servaddr,sizeof (conn->servaddr));
+	conn->servaddr.sin_family=AF_INET;
+	conn->servaddr.sin_port=htons(port_num = argc > 1 ? atoi(argv[1]) : SERVER_PORT);
+	inet_pton(AF_INET,"127.0.0.1",&(conn->servaddr.sin_addr));
+	conversation(conn, port_num);
 	return (0);
 }

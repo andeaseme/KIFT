@@ -57,7 +57,6 @@ char			*audiotostr(char *audiopath);
 ** src/client
 */
 char			*receive_string(struct s_con *temp);
-void 			send_voice(struct s_con *temp, int port_num);
 
 /*
 ** src/server

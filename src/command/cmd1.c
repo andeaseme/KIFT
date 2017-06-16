@@ -14,9 +14,22 @@
 
 int		cmd_unknown(struct s_con *temp)
 {
+	static int		i = 0;
+
 	(void)temp;
-	system("play resources/cantdo.wav");
+	i = i % 5;
+	if (0 == i)
+		system("play resources/cantdo.wav");
+	else if (1 == i)
+		system("play resources/quite_like_this.wav");
+	else if (2 == i)
+		system("play resources/human_error.wav");
+	else if (3 == i)
+		system("play resources/stop2.wav");
+	else if (4 == i)
+		system("play resources/goodbye.wav");
 	printf("Unknown command: %s\n", temp->speech);
+	i++;
 	return (1);
 }
 

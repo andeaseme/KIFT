@@ -12,6 +12,12 @@
 
 #include "kift.h"
 
+int					cmd_goodbye(struct s_con *temp)
+{
+	(void)temp;
+	return (0);
+}
+
 /*
 **	Set keywords
 */
@@ -25,6 +31,7 @@ static char const	*g_cmd_name[] = {
 	"OPEN GOOGLE MUSIC",
 	"OPEN MUSIC PLAYER",
 	"SEND E-MAIL",
+	"GOODBYE",
 	NULL
 };
 
@@ -48,6 +55,7 @@ static int			(*g_cmd_func[])(struct s_con *temp) = {
 	&cmd_googlemusic,
 	&cmd_googlemusic,
 	&cmd_sendemail,
+	&cmd_goodbye
 };
 
 int					cmd_sendemail(struct s_con *temp)
