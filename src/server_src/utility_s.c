@@ -29,6 +29,7 @@ void				handle_signal(int status)
 	{
 		fprintf(stderr, "Server fork exited signal code: %d\n", status);
 	}
+	RESET;
 }
 
 int					init_server_save(void)
