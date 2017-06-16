@@ -12,27 +12,7 @@
 
 #include "kift.h"
 
-static void		handle_signal(int status)
-{
-	RED;
-	if (status == SIGSEGV)
-	{
-		INVERSE;
-		fprintf(stderr, "Server fork exited with SEGV\n");
-	}
-	else if (status == SIGBUS)
-	{
-		BOLD;
-		fprintf(stderr, "Server fork exited with BUSE\n");
-	}
-	else
-	{
-		fprintf(stderr, "Server fork exited with unknown signal code: %d\n", status);
-	}
-	RESET;
-}
-
-void 	send_string(char *str, int comm_fd)
+static void		send_string(char *str, int comm_fd)
 {
 	uint32_t len;
 
@@ -41,86 +21,81 @@ void 	send_string(char *str, int comm_fd)
 	write(comm_fd, str, sizeof(char) * len);
 }
 
-int main()
+static void		server_save_command_data(char *command, int audio_count)
 {
-	int listen_fd, comm_fd = -1;
-	struct sockaddr_in servaddr;
-	int i;
-	FILE *fp;
-	void *data;
-	int wav_fd;
-	long size;
-	const char *command;
-	pid_t		f;
-	int			fstatus;
-	int			correct;
+	char	*str;
+	FILE	*fp;
 
-	i = 0;
-	if (lstat("./Train_src/serv_save/", NULL) == -1)
-		mkdir("./Train_src/serv_save/", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-	if (lstat("./Train_src/serv_save/NUM", NULL) != -1)
+	asprintf(&str, "cp new_wav.wav ./Train_src/serv_save/audio_%i.wav",
+		audio_count);
+	system(str);
+	fp = fopen("./Train_src/serv_save/commands.transcription", "ab+");
+	fprintf(fp, "<s> %s </s> (audio_%i)\n", command, audio_count);
+	fclose(fp);
+	fp = fopen("./Train_src/serv_save/commands.fileids", "ab+");
+	fprintf(fp, "audio_%i\n", audio_count);
+	fclose(fp);
+}
+
+static void		receive_file(int comm_fd)
+{
+	long	size;
+	void	*data;
+	int		wav_fd;
+
+	read(comm_fd, &size, sizeof(long));
+	printf("read size: %li\n", size);
+	wav_fd = open("new_wav.wav", O_RDWR | O_CREAT);
+	data = malloc(size);
+	read(comm_fd, data, size);
+	write(wav_fd, data, size);
+	system("chmod 777 new_wav.wav");
+}
+
+static void		server_fork(struct s_con *conn, int audio_count)
+{
+	int		comm_fd;
+	int		correct;
+
+	printf("listen: %d\n", listen(conn->sock_fd, 10));
+	comm_fd = accept(conn->sock_fd, (struct sockaddr*)NULL, NULL);
+	receive_file(comm_fd);
+	conn->speech = audiotostr("new_wav.wav");
+	send_string(conn->speech ? conn->speech : "ERROR", comm_fd);
+	read(comm_fd, &correct, sizeof(int));
+	close(comm_fd);
+	if (conn->speech && *conn->speech && correct)
 	{
-		fp = fopen ("./Train_src/serv_save/NUM", "r");
-		fscanf (fp, "%d", &i);
-		fclose(fp);
+		server_save_command_data(conn->speech, audio_count);
+		exit(0);
 	}
-	listen_fd = socket(AF_INET, SOCK_STREAM, 0);
-	bzero( &servaddr, sizeof(servaddr));
-	servaddr.sin_family = AF_INET;
-	servaddr.sin_addr.s_addr = htons(INADDR_ANY);
-	servaddr.sin_port = htons(22005);
-    bind(listen_fd, (struct sockaddr *) &servaddr, sizeof(servaddr));
+	exit(1);
+}
+
+int				main(int argc, char **argv)
+{
+	int				i;
+	pid_t			f;
+	int				fstatus;
+	struct s_con	*conn;
+
+	i = init_server_save();
+	conn = init_server(argc > 1 ? atoi(argv[1]) : SERVER_PORT);
 	while (1)
 	{
 		f = fork();
 		if (0 == f)
-		{
-			printf("listen: %d\n",listen(listen_fd, 10));
-			comm_fd = accept(listen_fd, (struct sockaddr*) NULL, NULL);
-			read(comm_fd, &size, sizeof(long));
-			printf("read size: %li\n", size);
-			wav_fd = open("new_wav.wav", O_RDWR|O_CREAT);
-			data = malloc(size);
-			read(comm_fd, data, size);
-			write(wav_fd, data, size);
-			system("chmod 777 new_wav.wav");
-			command = audiotostr("new_wav.wav");
-			send_string(command ? (char*)command : "ERROR", comm_fd);
-			read(comm_fd, &correct, sizeof(int));
-			if (command && *command && correct)
-			{
-				char *str;
-				asprintf(&str, "cp new_wav.wav ./Train_src/serv_save/audio_%i.wav", i);
-				system(str);
-				fp = fopen("./Train_src/serv_save/commands.transcription", "ab+");
-				fprintf(fp, "<s> %s </s> (audio_%i)\n", command, i);
-				fclose(fp);
-				fp = fopen("./Train_src/serv_save/commands.fileids", "ab+");
-				fprintf(fp, "audio_%i\n", i);
-				fclose(fp);
-				exit(0);
-			}
-			exit(1);
-		}
-		else if (-1 == f)
-		{
-			RED;
-			fprintf(stderr, "Server failed to fork.\n");
+			server_fork(conn, i);
+		else if (-1 == f && RED && fprintf(stderr, "Server failed to fork.\n"))
 			RESET;
-		}
 		else
 		{
 			wait(&fstatus);
 			if (WIFSIGNALED(fstatus))
 				handle_signal(fstatus);
 			else if (WIFEXITED(fstatus) && 0 == fstatus)
-			{
-				i++;
-				fp = fopen ("./Train_src/serv_save/NUM", "w");
-				fprintf(fp, "%d", i);
-				fclose(fp);
-			}
-			close(comm_fd);
+				i = increment_audio_count(i);
 		}
 	}
+	return (0);
 }
