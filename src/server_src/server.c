@@ -16,6 +16,7 @@ static void		send_string(char *str, int comm_fd)
 {
 	uint32_t len;
 
+	printf("sending string: %s\n", str);
 	len = strlen(str);
 	write(comm_fd, &len, sizeof(uint32_t));
 	write(comm_fd, str, sizeof(char) * len);
@@ -55,16 +56,16 @@ static void		receive_file(int comm_fd)
 static void		server_fork(struct s_con *conn, int audio_count)
 {
 	int		comm_fd;
-	int		correct;
+	int		ret;
 
 	printf("listen: %d\n", listen(conn->sock_fd, 10));
 	comm_fd = accept(conn->sock_fd, (struct sockaddr*)NULL, NULL);
 	receive_file(comm_fd);
 	conn->speech = audiotostr("new_wav.wav");
-	send_string(conn->speech ? conn->speech : "ERROR", comm_fd);
-	read(comm_fd, &correct, sizeof(int));
+	send_string(conn->speech && *conn->speech ? conn->speech : "ERROR", comm_fd);
+	read(comm_fd, &ret, sizeof(int));
 	close(comm_fd);
-	if (conn->speech && *conn->speech && correct)
+	if (conn->speech && *conn->speech && 0 == ret)
 	{
 		server_save_command_data(conn->speech, audio_count);
 		exit(0);

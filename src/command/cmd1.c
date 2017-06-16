@@ -14,8 +14,9 @@
 
 int		cmd_unknown(struct s_con *temp)
 {
-	(void)temp->sock_fd;
-	return (0);
+	(void)temp;
+	printf("Unknown command: %s\n", temp->speech);
+	return (1);
 }
 
 int		cmd_googlesearch(struct s_con *temp)
