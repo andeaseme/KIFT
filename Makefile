@@ -40,7 +40,7 @@ _OBJ =	command.o set_egg_timer.o cmd1.o \
 OBJ :=	$(addprefix $(ODIR)/,$(_OBJ))
 
 
-_C_OBJ =	client.o command.o set_egg_timer.o cmd1.o
+_C_OBJ =	client.o command.o set_egg_timer.o cmd1.o utility_s.o
 C_OBJ :=	$(addprefix $(ODIR)/,$(_C_OBJ))
 
 _S_OBJ =	server.o audiotostr.o train.o utility_s.o

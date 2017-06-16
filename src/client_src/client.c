@@ -66,18 +66,14 @@ int main(int argc, char **argv)
 {
 	struct s_con 	*conn;
 	int				correct;
-	char			buff;
 
 	conn = (struct s_con*)malloc(sizeof(struct s_con));
 	conn->speech = NULL;
 	system("rm -rf *.wav");
 	send_voice(conn, argc > 1 ? atoi(argv[1]) : SERVER_PORT);
 	printf("%s\n", conn->speech = receive_string(conn));
-	ft_putstr("correct? [y/n]");
-	read(0, &buff, sizeof(char));
-	correct = (buff == 'y') ? 1 : 0;
+	correct = command(conn->speech, conn);
 	write(conn->sock_fd, &correct, sizeof(int));
-	command(conn->speech, conn);
 	free(conn->speech);
 	return (0);
 }

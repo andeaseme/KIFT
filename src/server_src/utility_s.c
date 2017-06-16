@@ -18,31 +18,33 @@ void				handle_signal(int status)
 	if (status == SIGSEGV)
 	{
 		INVERSE;
-		fprintf(stderr, "Server fork exited with SEGV\n");
+		fprintf(stderr, "Fork exited with SEGV\n");
 	}
 	else if (status == SIGBUS)
 	{
 		BOLD;
-		fprintf(stderr, "Server fork exited with BUSE\n");
+		fprintf(stderr, "Fork exited with BUSE\n");
 	}
 	else
 	{
-		fprintf(stderr, "Server fork exited signal code: %d\n", status);
+		fprintf(stderr, "Fork exited with signal code: %d\n", status);
 	}
+	RESET;
 }
 
 int					init_server_save(void)
 {
-	int		i;
-	FILE	*fp;
+	int				i;
+	FILE			*fp;
+	struct stat		buf;
 
 	i = 0;
-	if (lstat("./Train_src/serv_save/", NULL) == -1)
+	if (lstat("./Train_src/serv_save/", &buf) == -1)
 	{
 		printf("make server save dir\n");
 		mkdir("./Train_src/serv_save/", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	}
-	else if (lstat("./Train_src/serv_save/NUM", NULL) != -1)
+	if (lstat("./Train_src/serv_save/NUM", &buf) != -1)
 	{
 		fp = fopen("./Train_src/serv_save/NUM", "r");
 		fscanf(fp, "%d", &i);

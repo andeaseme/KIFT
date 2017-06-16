@@ -61,5 +61,5 @@ char    *audiotostr(char *audiopath)
     cmd_ln_free_r(config);
     ps_free(ps);
     printf("audiotostr returning: '%s'\n", hyp);
-    return(ft_strdup(hyp));
+    return(hyp ? ft_strdup(hyp) : 0);
 }
