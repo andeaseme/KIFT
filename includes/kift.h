@@ -43,6 +43,7 @@
 
 struct s_con
 {
+	int					i;
 	int					sock_fd;
 	struct sockaddr_in	servaddr;
 	char				*speech;
@@ -56,7 +57,7 @@ char			*audiotostr(char *audiopath);
 /*
 ** src/client
 */
-char			*receive_string(struct s_con *temp);
+char			*receive_string(struct s_con *conn);
 
 /*
 ** src/server
@@ -70,12 +71,11 @@ int					increment_audio_count(int ac);
 ** src/command
 */
 int				command(char *speech, struct s_con *temp);
-int				find_string(char *speech, char const *targets[]);
-int				cmd_unknown(struct s_con *temp);
-int				cmd_seteggtimer(struct s_con *temp);
-int				cmd_showmetemps(struct s_con *temp);
-int				cmd_toggletraining(struct s_con *temp);
-int				cmd_googlesearch(struct s_con *temp);
-int				cmd_googlemusic(struct s_con *temp);
-int				cmd_sendemail(struct s_con *temp);
+int				cmd_unknown(void *cmd);
+int				cmd_seteggtimer(void *cmd);
+int				cmd_showmetemps(void *cmd);
+int				cmd_toggletraining(void *cmd);
+int				cmd_googlesearch(void *cmd);
+int				cmd_googlemusic(void *cmd);
+int				cmd_sendemail(void *cmd);
 void 			train(void);

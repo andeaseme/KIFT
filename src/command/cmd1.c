@@ -12,12 +12,11 @@
 
 #include "kift.h"
 
-int		cmd_unknown(struct s_con *temp)
+int		cmd_unknown(void *cmd)
 {
-	static int		i = 0;
+	int		i;
 
-	(void)temp;
-	i = i % 5;
+	i = *((int*)cmd);
 	if (0 == i)
 		system("play resources/cantdo.wav");
 	else if (1 == i)
@@ -28,14 +27,33 @@ int		cmd_unknown(struct s_con *temp)
 		system("play resources/stop2.wav");
 	else if (4 == i)
 		system("play resources/goodbye.wav");
-	printf("Unknown command: %s\n", temp->speech);
-	i++;
 	return (1);
 }
 
-int		cmd_googlesearch(struct s_con *temp)
+int		cmd_googlesearch(void *cmd)
 {
+	(void)cmd;
 	system("open https://google.com");
-	(void)temp;
+	return (0);
+}
+
+int		cmd_sendemail(void *cmd)
+{
+	(void)cmd;
+	system("open https://gmail.com");
+	return (0);
+}
+
+int		cmd_showmetemps(void *cmd)
+{
+	(void)cmd;
+	system("osx-cpu-temp");
+	return (0);
+}
+
+int		cmd_googlemusic(void *cmd)
+{
+	(void)cmd;
+	system("open https://music.google.com/");
 	return (0);
 }
