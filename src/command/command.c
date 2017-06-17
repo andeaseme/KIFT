@@ -32,14 +32,7 @@ static char const	*g_cmd_name[] = {
 **	Set command functions
 */
 
-int					cmd_googlemusic(struct s_con *temp)
-{
-	(void)temp;
-	system("open https://music.google.com/");
-	return (0);
-}
-
-static int			(*g_cmd_func[])(struct s_con *temp) = {
+static int			(*g_cmd_func[])(void *cmd) = {
 	&cmd_unknown,
 	&cmd_seteggtimer,
 	&cmd_showmetemps,
@@ -50,21 +43,7 @@ static int			(*g_cmd_func[])(struct s_con *temp) = {
 	&cmd_sendemail,
 };
 
-int					cmd_sendemail(struct s_con *temp)
-{
-	(void)temp;
-	system("open https://gmail.com");
-	return (0);
-}
-
-int					cmd_showmetemps(struct s_con *temp)
-{
-	(void)temp;
-	system("osx-cpu-temp");
-	return (0);
-}
-
-int		find_string(char *speech, char const *targets[])
+static int			find_string(char *speech, char const *targets[])
 {
 	int		i;
 
@@ -83,7 +62,7 @@ int		find_string(char *speech, char const *targets[])
 **	and returns corresponding cmd_code then runs command in a fork
 */
 
-int				command(char *speech, struct s_con *temp)
+int					command(char *speech, struct s_con *temp)
 {
 	int		cmd_code;
 	pid_t	f;
@@ -92,6 +71,7 @@ int				command(char *speech, struct s_con *temp)
 	cmd_code = find_string(speech, g_cmd_name);
 	f = fork();
 	fstatus = 1;
+	printf("Forking for: %s\n", g_cmd_name[cmd_code]);
 	if (0 == f)
 		exit(g_cmd_func[cmd_code](temp));
 	else if (-1 == f)
