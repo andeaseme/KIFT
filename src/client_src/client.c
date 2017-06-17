@@ -18,27 +18,29 @@ void	error(char *msg)
 	exit(0);
 }
 
-void 	 send_file(char *filename, struct s_con *conn)
+void	send_file(char *filename, struct s_con *conn)
 {
-	int fd;
-	char buff[4096];
-	int bytes_read;
-	struct stat st;
+	int			fd;
+	char		buff[4096];
+	int			bytes_read;
+	struct stat	st;
+	long		size;
 
 	fd = open(filename, O_RDONLY);
 	fstat(fd, &st);
-	long size = st.st_size;
+	size = st.st_size;
 	printf("%li\n", size);
 	write(conn->sock_fd, &size, sizeof(size));
 	bzero(buff, 4096);
 	while ((bytes_read = read(fd, &buff, 4096)))
-			write(conn->sock_fd, buff, bytes_read);
+		write(conn->sock_fd, buff, bytes_read);
 	close(fd);
 }
 
-void 	send_voice(struct s_con *conn)
+void	send_voice(struct s_con *conn)
 {
-	connect(conn->sock_fd,(struct sockaddr *)&conn->servaddr,sizeof(conn->servaddr));
+	connect(conn->sock_fd, (struct sockaddr *)&conn->servaddr,
+		sizeof(conn->servaddr));
 	system("rec -c 1 -r 16000 -b 16 recording.wav \
 		gain +5 silence 1 0.1 3% 1 2.0 3%");
 	send_file("recording.wav", conn);
