@@ -19,10 +19,16 @@ def commandloop(command):
 		os.system('../../neofetch/neofetch')
 	elif (command == "SET EGG TIMER"):
 		os.system('open https://www.google.com/search?q=8+minute+timer&oq=8+minute+timer&aqs=chrome..69i57j0l5.2158j0j9&sourceid=chrome&ie=UTF-8')
-	elif (command == "WHO AM I"): #NEED TO GET MODEL TO RECOGNIZE IT
+	elif (command == "SHOW CONNECTED USER"):
 		os.system('whoami')
-	elif (command == 'WHERE AM I'): #NEED TO FIX MODEL
+	elif (command == 'WHERE AM I'):
 		os.system('hostname')
+	elif (command == 'LIGHTS ON'): #NEED TO FIX MODEL
+		os.system('say fix')#FIX
+	elif (command == 'LIGHTS OFF')
+		os.system('say fix')#FIX
+	elif (command == 'CHECK LIGHTS')
+		os.system('say fix')#FIX
 	else:
 		os.system('play ./../../resources/cantdo.wav')
 
@@ -43,15 +49,17 @@ def connect(HOST, PORT):
 	print data
 	s.close
 	commandloop(data)
+	data = ""
+	print data
 
 if __name__ == "__main__":
 	HOST = "127.0.0.1"
 	PORT = 22005
-	HOST = raw_input("Enter IP Default (127.0.0.1) if left empty")
+	HOST = raw_input("Enter IP Default (127.0.0.1) if left empty: ")
 	cont = 1
 	if HOST is "":
 		HOST = "127.0.0.1"
-	ans = raw_input("Enter PORT Default (22005) if left empty")
+	ans = raw_input("Enter PORT Default (22005) if left empty: ")
 	if ans is "":
 		PORT = 22005
 	else:
@@ -64,5 +72,8 @@ if __name__ == "__main__":
 			os.remove("recording.wav")
 		except OSError:
 			pass
-		cont = raw_input("continue?")
-		cont = int(cont)
+		cont = raw_input("continue? y/n :")
+		if (cont == 'y'):
+			cont = int(1)
+		else:
+			cont = int(0)
