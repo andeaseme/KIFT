@@ -6,7 +6,7 @@
 #    By: aphan <aphan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/24 17:12:26 by aphan             #+#    #+#              #
-#    Updated: 2017/06/17 18:12:03 by rmatos           ###   ########.fr        #
+#    Updated: 2017/06/18 15:30:30 by rmatos           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,13 +32,13 @@ SPHINXFLAGS =	-DMODELDIR=\"`pkg-config --variable=modeldir pocketsphinx`\" \
 LIBFT =	-L $(LDIR) -lft
 DEPS =	$(IDIR)/kift.h
 
-_OBJ =	command.o cmd2.o cmd1.o \
+_OBJ =	command.o cmd3.o cmd2.o cmd1.o \
 		audiotostr.o \
 		client.o server.o utility.o history.o
 OBJ :=	$(addprefix $(ODIR)/,$(_OBJ))
 
 
-_C_OBJ =	client.o command.o cmd2.o cmd1.o utility.o history.o
+_C_OBJ =	client.o command.o cmd3.o cmd2.o cmd1.o utility.o history.o
 C_OBJ :=	$(addprefix $(ODIR)/,$(_C_OBJ))
 
 _S_OBJ =	server.o audiotostr.o utility.o
