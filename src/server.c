@@ -51,6 +51,7 @@ static void		receive_file(int comm_fd)
 	read(comm_fd, data, size);
 	write(wav_fd, data, size);
 	system("chmod 777 new_wav.wav");
+	free(data);
 }
 
 static void		server_fork(struct s_con *conn, int audio_count)
