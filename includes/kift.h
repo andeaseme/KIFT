@@ -30,9 +30,9 @@
 # define MLLR			"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/mllr_solve"
 # define MAP 			"~/.brew/Cellar/cmu-sphinxtrain/HEAD-eb8bfba/libexec/sphinxtrain/map_adapt"
 
-# define HMMDIR			"ROB"
-# define LANGDIR		"2823.lm"
-# define DICTDIR		"2823.dic"
+# define HMMDIR			"lang_model"
+# define LANGDIR		"lang_model/2823.lm"
+# define DICTDIR		"lang_model/2823.dic"
 # define READ_SIZE		2048
 
 # define RESET			write(1, "\x1b[0m", 4)

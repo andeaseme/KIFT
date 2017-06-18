@@ -22,19 +22,19 @@ static void		send_string(char *str, int comm_fd)
 	write(comm_fd, str, sizeof(char) * len);
 }
 
-static void		server_save_command_data(char *command, int audio_count)
+static void		server_save_history(char *command, int audio_count)
 {
 	char	*str;
 	FILE	*fp;
 
 	printf("saving command to history\n");
-	asprintf(&str, "cp new_wav.wav ./Train_src/serv_save/audio_%i.wav",
+	asprintf(&str, "cp new_wav.wav ./server_history/audio_%i.wav",
 		audio_count);
 	system(str);
-	fp = fopen("./Train_src/serv_save/commands.transcription", "ab+");
+	fp = fopen("./server_history/commands.transcription", "ab+");
 	fprintf(fp, "<s> %s </s> (audio_%i)\n", command, audio_count);
 	fclose(fp);
-	fp = fopen("./Train_src/serv_save/commands.fileids", "ab+");
+	fp = fopen("./server_history/commands.fileids", "ab+");
 	fprintf(fp, "audio_%i\n", audio_count);
 	fclose(fp);
 	free(str);
@@ -49,7 +49,7 @@ void			send_history(int comm_fd)
 	long			size;
 
 	printf("sending history...");
-	fd = open("./Train_src/serv_save/commands.transcription", O_RDONLY);
+	fd = open("./server_history/commands.transcription", O_RDONLY);
 	bzero(&st, sizeof(st));
 	fstat(fd, &st);
 	size = st.st_size;
@@ -99,7 +99,7 @@ static void		server_fork(struct s_con *conn, int audio_count)
 	close(comm_fd);
 	if (conn->speech && *conn->speech && 0 != ret)
 	{
-		server_save_command_data(conn->speech, audio_count);
+		server_save_history(conn->speech, audio_count);
 		exit(0);
 	}
 	exit(1);

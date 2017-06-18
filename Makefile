@@ -85,6 +85,6 @@ fclean: clean wav
 re: fclean all
 
 wav:
-	/bin/rm -rfv Train_src/serv_save
+	/bin/rm -rfv server_history
 
 .PHONY: all clean fclean re wav

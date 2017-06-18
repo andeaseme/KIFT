@@ -60,6 +60,6 @@ dkms.conf
 .nfs.*
 server
 client
-Train_src/serv_save/*
+server_history/*
 new_wav.wav
 recording.wav

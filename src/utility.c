@@ -39,14 +39,14 @@ int					init_server_save(void)
 	struct stat		buf;
 
 	i = 0;
-	if (lstat("./Train_src/serv_save/", &buf) == -1)
+	if (lstat("./server_history/", &buf) == -1)
 	{
 		printf("make server save dir\n");
-		mkdir("./Train_src/serv_save/", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+		mkdir("./server_history/", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	}
-	if (lstat("./Train_src/serv_save/NUM", &buf) != -1)
+	if (lstat("./server_history/NUM", &buf) != -1)
 	{
-		fp = fopen("./Train_src/serv_save/NUM", "r");
+		fp = fopen("./server_history/NUM", "r");
 		fscanf(fp, "%d", &i);
 		fclose(fp);
 	}
@@ -74,7 +74,7 @@ int					increment_audio_count(int ac)
 	FILE *fp;
 
 	ac++;
-	fp = fopen("./Train_src/serv_save/NUM", "w");
+	fp = fopen("./server_history/NUM", "w");
 	fprintf(fp, "%d", ac);
 	fclose(fp);
 	printf("audio count: %i\n", ac);
