@@ -6,11 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:50:22 by aphan             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2017/06/17 22:24:21 by rmatos           ###   ########.fr       */
-=======
-/*   Updated: 2017/06/17 22:07:56 by rpassafa         ###   ########.fr       */
->>>>>>> 7c1992c052db7fe3501e68045eb52b9f5c9ac1fc
+/*   Updated: 2017/06/17 23:01:12 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +49,10 @@ int			cmd_whereami(void *cmd)
 {
 	(void)cmd;
 	system("hostname");
+	return (0);
+}
+
+int			cmd_lights(void *cmd)
+{
+	
 }

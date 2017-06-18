@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 16:00:37 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/17 18:29:43 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/17 22:50:09 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,5 @@ int						cmd_googlesearch(void *cmd);
 int						cmd_googlemusic(void *cmd);
 int						cmd_sendemail(void *cmd);
 int						cmd_showsysteminfo(void *cmd);
+int						cmd_whoami(void *cmd);
+int						cmd_whereami(void *cmd);
