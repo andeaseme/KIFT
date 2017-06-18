@@ -16,24 +16,27 @@ def connect(HOST, PORT):
 	temp = f.read(i)
 	s.send(temp)
 	size = s.recv(4)
+	# print(int(size))
 	buf = ''
 	data = s.recv(1024)
 	print data
 	s.close
 
-
-HOST = "127.0.0.1"
-PORT = 22005
-
-HOST = raw_input("Enter IP Default (127.0.0.1) if left empty")
-if HOST is "":
+if __name__ == "__main__":
 	HOST = "127.0.0.1"
-ans = raw_input("Enter PORT Default (22005) if left empty")
-if ans is "":
 	PORT = 22005
-else:
-	PORT = int(ans)
-
-print "HOST:" + HOST
-print "PORT:" + str(PORT)
-connect(HOST, PORT)
+	HOST = raw_input("Enter IP Default (127.0.0.1) if left empty")
+	if HOST is "":
+		HOST = "127.0.0.1"
+	ans = raw_input("Enter PORT Default (22005) if left empty")
+	if ans is "":
+		PORT = 22005
+	else:
+		PORT = int(ans)
+	print "HOST:" + HOST
+	print "PORT:" + str(PORT)
+	connect(HOST, PORT)
+	try:
+		os.remove("recording.wav")
+	except OSError:
+		pass
