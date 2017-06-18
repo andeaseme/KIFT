@@ -33,7 +33,7 @@ int		cmd_unknown(void *cmd)
 int		cmd_googlesearch(void *cmd)
 {
 	(void)cmd;
-	system("say 'opening google'");
+	system("say opening google");
 	system("open https://google.com");
 	return (0);
 }
@@ -41,7 +41,7 @@ int		cmd_googlesearch(void *cmd)
 int		cmd_sendemail(void *cmd)
 {
 	(void)cmd;
-	system("say 'opening gee-mail'");
+	system("say opening gee-mail");
 	system("open https://gmail.com");
 	return (0);
 }
@@ -49,6 +49,7 @@ int		cmd_sendemail(void *cmd)
 int		cmd_showmetemps(void *cmd)
 {
 	(void)cmd;
+	system("say here is the c-p-u temperature");
 	system("./osx-cpu-temp/osx-cpu-temp");
 	return (0);
 }
@@ -56,7 +57,7 @@ int		cmd_showmetemps(void *cmd)
 int		cmd_googlemusic(void *cmd)
 {
 	(void)cmd;
-	system("say 'opening google music'");
+	system("say opening google music");
 	system("open https://music.google.com/");
 	return (0);
 }

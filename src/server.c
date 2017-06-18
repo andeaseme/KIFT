@@ -40,31 +40,6 @@ static void		server_save_history(char *command, int audio_count)
 	free(str);
 }
 
-void			send_history(int comm_fd)
-{
-	int				fd;
-	char			buff[4096];
-	int				bytes_read;
-	struct stat		st;
-	long			size;
-
-	printf("sending history...");
-	fd = open("./server_history/commands.transcription", O_RDONLY);
-	bzero(&st, sizeof(st));
-	fstat(fd, &st);
-	size = st.st_size;
-	write(comm_fd, &size, sizeof(size));
-	bzero(buff, 4096);
-	printf ("size: %li\n", size);
-	while ((bytes_read = read(fd, &buff, 4096)))
-	{
-		write(comm_fd, buff, bytes_read);
-		printf("%s", buff);
-	}
-	close(fd);
-	exit (1);
-}
-
 static void		receive_file(int comm_fd)
 {
 	long	size;

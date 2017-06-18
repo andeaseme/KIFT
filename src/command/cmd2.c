@@ -54,8 +54,8 @@ int			cmd_whereami(void *cmd)
 
 int			cmd_lights(void *cmd)
 {
-	FILE *fp;
-	int	on;
+	FILE	*fp;
+	int		on;
 
 	(void)cmd;
 	if ((fp = fopen("lights", "r+")) == NULL)
@@ -78,5 +78,4 @@ int			cmd_lights(void *cmd)
 		system("say lights are on");
 	}
 	return (0);
-
 }
