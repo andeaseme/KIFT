@@ -71,8 +71,8 @@ int					command(char *speech, struct s_con *temp)
 	int		fstatus;
 
 	cmd_code = find_string(speech, g_cmd_name);
-	f = fork();
 	printf("Forking for: %s\n", g_cmd_name[cmd_code]);
+	f = fork();
 	if (0 == f)
 		exit(g_cmd_func[cmd_code](temp));
 	else if (-1 == f)
