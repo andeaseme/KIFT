@@ -3,7 +3,7 @@
 #COMMAND LIST
 Set egg timer
 Show me temps
-Show me termperatures
+Show me temperatures
 Open Google
 Open Google Music
 Open Music PLAYER

@@ -13,6 +13,8 @@ def commandloop(command):
 		os.system('osx-cpu-temp')
 	elif (command == "OPEN GOOGLE MUSIC" | "OPEN MUSIC PLAYER"):
 		os.system('open https://music.google.com')
+	elif (command == "SHOW ME WEATHER")
+		os.system('sh weather.sh')
 
 
 
@@ -30,8 +32,6 @@ def connect(HOST, PORT):
 	temp = f.read(i)
 	s.send(temp)
 	size = s.recv(4)
-	# print(int(size))
-	buf = ''
 	data = s.recv(1024)
 	print data
 	s.close
