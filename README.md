@@ -10,8 +10,13 @@ Open Music PLAYER
 Send e-mail
 Show me system information (c) / System information (python)
 Show me weather
-Who am I*
-Who is connected*
-Where am I*
-Turn On Lights*
-Turn Off Lights*
+Who am I
+Show connected user
+Where am I
+Lights
+History*
+
+
+NOTES: fix c client to work with diff ip
+	-implement history
+	-implement history playback

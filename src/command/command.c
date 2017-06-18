@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:49:45 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/17 18:29:03 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/17 23:15:44 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ static char const	*g_cmd_name[] = {
 	"OPEN MUSIC PLAYER",
 	"SEND E-MAIL",
 	"SHOW ME SYSTEM INFORMATION",
+	"SHOW CONNECTED USER",
+	"WHERE AM I",
+	"LIGHTS",
 	NULL
 };
 
@@ -42,7 +45,10 @@ static int			(*g_cmd_func[])(void *cmd) = {
 	&cmd_googlemusic,
 	&cmd_googlemusic,
 	&cmd_sendemail,
-	&cmd_showsysteminfo
+	&cmd_showsysteminfo,
+	&cmd_whoami,
+	&cmd_whereami,
+	&cmd_lights
 };
 
 static int			find_string(char *speech, char const *targets[])
@@ -58,11 +64,6 @@ static int			find_string(char *speech, char const *targets[])
 	}
 	return (0);
 }
-
-/*
-**	Search for a command string within the speech string
-**	and returns corresponding cmd_code then runs command in a fork
-*/
 
 int					command(char *speech, struct s_con *temp)
 {
