@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 15:02:30 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/17 21:33:21 by rpassafa         ###   ########.fr       */
+/*   Updated: 2017/06/18 14:38:53 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		cmd_unknown(void *cmd)
 int		cmd_googlesearch(void *cmd)
 {
 	(void)cmd;
-	system("./SAM/sam 'opening google'");
+	system("say 'opening google'");
 	system("open https://google.com");
 	return (0);
 }
@@ -41,7 +41,7 @@ int		cmd_googlesearch(void *cmd)
 int		cmd_sendemail(void *cmd)
 {
 	(void)cmd;
-	system("./SAM/sam 'opening gee-mail'");
+	system("say 'opening gee-mail'");
 	system("open https://gmail.com");
 	return (0);
 }
@@ -56,7 +56,7 @@ int		cmd_showmetemps(void *cmd)
 int		cmd_googlemusic(void *cmd)
 {
 	(void)cmd;
-	system("./SAM/sam 'opening google music'");
+	system("say 'opening google music'");
 	system("open https://music.google.com/");
 	return (0);
 }

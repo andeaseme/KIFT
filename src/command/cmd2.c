@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:50:22 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/17 23:24:19 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/18 14:39:28 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int			cmd_seteggtimer(void *cmd)
 	start = clock();
 	time = 8 * 60 * CLOCKS_PER_SEC;
 	printf("eight minute timer set\n");
-	system("./SAM/sam 'Eight min-ut timer set'");
+	system("say 'Eight minute timer set'");
 	while (time > clock() - start)
 		;
 	printf("your egg is ready!\n");
-	system("./SAM/sam 'your egg is ready'");
+	system("say 'your egg is ready'");
 	exit(0);
 	return (0);
 }
