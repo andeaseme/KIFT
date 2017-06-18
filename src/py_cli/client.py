@@ -17,10 +17,12 @@ def commandloop(command):
 		os.system('sh weather.sh')
 	elif (command == "SYSTEM INFORMATION"):
 		os.system('../../neofetch/neofetch')
+	elif (command == "SET EGG TIMER"):
+		os.system('open https://www.google.com/search?q=8+minute+timer&oq=8+minute+timer&aqs=chrome..69i57j0l5.2158j0j9&sourceid=chrome&ie=UTF-8')
 	elif (command == "WHO AM I"): #NEED TO GET MODEL TO RECOGNIZE IT
 		os.system('whoami')
-	elif (command == 'LOCATION') #NEED TO FIX MODEL
-		os.system('curl freegeoip.net/xml/17.178.96.59')
+	elif (command == 'WHERE AM I'): #NEED TO FIX MODEL
+		os.system('hostname')
 	else:
 		os.system('play ./../../resources/cantdo.wav')
 
@@ -46,6 +48,7 @@ if __name__ == "__main__":
 	HOST = "127.0.0.1"
 	PORT = 22005
 	HOST = raw_input("Enter IP Default (127.0.0.1) if left empty")
+	cont = 1
 	if HOST is "":
 		HOST = "127.0.0.1"
 	ans = raw_input("Enter PORT Default (22005) if left empty")
@@ -55,8 +58,11 @@ if __name__ == "__main__":
 		PORT = int(ans)
 	print "HOST:" + HOST
 	print "PORT:" + str(PORT)
-	connect(HOST, PORT)
-	try:
-		os.remove("recording.wav")
-	except OSError:
-		pass
+	while cont:
+		connect(HOST, PORT)
+		try:
+			os.remove("recording.wav")
+		except OSError:
+			pass
+		cont = raw_input("continue?")
+		cont = int(cont)

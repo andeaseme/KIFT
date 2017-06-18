@@ -6,7 +6,11 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:50:22 by aphan             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2017/06/17 23:01:12 by rmatos           ###   ########.fr       */
+=======
+/*   Updated: 2017/06/17 22:34:07 by rpassafa         ###   ########.fr       */
+>>>>>>> f239f4206fe9dd2d0a3be43c36ee6da7a61390f1
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +40,7 @@ int			cmd_showsysteminfo(void *cmd)
 	system("./neofetch/neofetch");
 	return (0);
 }
+<<<<<<< HEAD
 
 int			cmd_whoami(void *cmd)
 {
@@ -56,3 +61,5 @@ int			cmd_lights(void *cmd)
 {
 	
 }
+=======
+>>>>>>> f239f4206fe9dd2d0a3be43c36ee6da7a61390f1
