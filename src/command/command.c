@@ -66,23 +66,14 @@ int					command(char *speech, struct s_con *temp)
 {
 	int		cmd_code;
 	pid_t	f;
-	int		fstatus;
 
 	cmd_code = find_string(speech, g_cmd_name);
 	f = fork();
-	fstatus = 1;
 	printf("Forking for: %s\n", g_cmd_name[cmd_code]);
 	if (0 == f)
 		exit(g_cmd_func[cmd_code](temp));
 	else if (-1 == f)
 		fprintf(stderr, "Failed to create fork for command: %s\n",
 			g_cmd_name[cmd_code]);
-	else
-	{
-		wait(&fstatus);
-		if (WIFSIGNALED(fstatus))
-			handle_signal(fstatus);
-	}
-	printf("command status: %i\n", fstatus);
-	return (fstatus);
+	return (cmd_code);
 }

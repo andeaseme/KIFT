@@ -68,7 +68,7 @@ int		main(int argc, char **argv)
 	port_num = argc > 1 ? atoi(argv[1]) : SERVER_PORT;
 	conn = (struct s_con*)calloc(1, sizeof(struct s_con));
 	ret = 1;
-	while (0 != ret && 5 > conn->i)
+	while (0 == ret && 5 > conn->i)
 	{
 		conn->sock_fd = socket(AF_INET, SOCK_STREAM, 0);
 		bzero(&conn->servaddr, sizeof(conn->servaddr));
