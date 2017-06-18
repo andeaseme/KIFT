@@ -97,12 +97,6 @@ static void		server_fork(struct s_con *conn, int audio_count)
 		? conn->speech : "ERROR", comm_fd);
 	read(comm_fd, &ret, sizeof(int));
 	close(comm_fd);
-	// TEST SECTION
-
-	conn->speech = ft_strdup("SHOW HISTORY");
-	printf("ret: %i\nnew speech: %s\n", ret, conn->speech);
-
-	// TEST SECTION
 	if (conn->speech && *conn->speech && 0 != ret)
 	{
 		server_save_command_data(conn->speech, audio_count);

@@ -72,12 +72,6 @@ int		main(int argc, char **argv)
 		printf("sending voice through port: %i\n", conn->port_num);
 		send_voice(conn);
 		printf("%s\n", conn->speech = receive_string(conn));
-		// TEST SECTION
-
-		free(conn->speech);
-		conn->speech = ft_strdup("SHOW HISTORY");
-
-		// TEST SECTION
 		ret = command(conn->speech, conn);
 		write(conn->sock_fd, &ret, sizeof(int));
 		free(conn->speech);
