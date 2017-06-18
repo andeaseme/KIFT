@@ -39,6 +39,25 @@ static void		server_save_command_data(char *command, int audio_count)
 	free(str);
 }
 
+void			send_history(int comm_fd)
+{
+	int				fd;
+	char			buff[4096];
+	int				bytes_read;
+	struct stat		st;
+	long			size;
+
+	fd = open("./Train_src/serv_save/commands.transcription", O_RDONLY);
+	fstat(fd, &st);
+	size = st.st_size;
+	write(comm_fd, &size, sizeof(size));
+	bzero(buff, 4096);
+	while ((bytes_read = read(fd, &buff, 4096)))
+		write(comm_fd, buff, bytes_read);
+	close(fd);
+	exit (0);
+}
+
 static void		receive_file(int comm_fd)
 {
 	long	size;
@@ -53,6 +72,9 @@ static void		receive_file(int comm_fd)
 	write(wav_fd, data, size);
 	system("chmod 777 new_wav.wav");
 	free(data);
+	if (size != strlen(HISTORY_KEY))
+		return ;
+	send_history(comm_fd);
 }
 
 static void		server_fork(struct s_con *conn, int audio_count)

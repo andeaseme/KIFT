@@ -59,8 +59,8 @@ int		main(int argc, char **argv)
 	int				port_num;
 	struct s_con	*conn;
 
-	port_num = argc > 1 ? atoi(argv[1]) : SERVER_PORT;
 	conn = (struct s_con*)calloc(1, sizeof(struct s_con));
+	port_num = argc > 1 ? atoi(argv[1]) : SERVER_PORT;
 	ret = 0;
 	while (0 == ret && 5 > conn->i)
 	{

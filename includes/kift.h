@@ -41,9 +41,12 @@
 # define INVERSE		write(1, "\x1b[7m", 4)
 # define BOLD			write(1, "\x1b[1m", 4)
 
+# define HISTORY_KEY	"history"
+
 struct s_con
 {
 	int					i;
+	int					port_num;
 	int					sock_fd;
 	struct sockaddr_in	servaddr;
 	char				*speech;
