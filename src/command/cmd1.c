@@ -33,6 +33,7 @@ int		cmd_unknown(void *cmd)
 int		cmd_googlesearch(void *cmd)
 {
 	(void)cmd;
+	system("./SAM/sam 'opening google'");
 	system("open https://google.com");
 	return (0);
 }
@@ -40,6 +41,7 @@ int		cmd_googlesearch(void *cmd)
 int		cmd_sendemail(void *cmd)
 {
 	(void)cmd;
+	system("./SAM/sam 'opening gee-mail'");	
 	system("open https://gmail.com");
 	return (0);
 }
@@ -54,6 +56,7 @@ int		cmd_showmetemps(void *cmd)
 int		cmd_googlemusic(void *cmd)
 {
 	(void)cmd;
+	system("./SAM/sam 'opening google music'");	
 	system("open https://music.google.com/");
 	return (0);
 }

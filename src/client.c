@@ -12,12 +12,6 @@
 
 #include "kift.h"
 
-void	error(char *msg)
-{
-	perror(msg);
-	exit(0);
-}
-
 void	send_file(char *filename, struct s_con *conn)
 {
 	int			fd;
@@ -67,8 +61,8 @@ int		main(int argc, char **argv)
 
 	port_num = argc > 1 ? atoi(argv[1]) : SERVER_PORT;
 	conn = (struct s_con*)calloc(1, sizeof(struct s_con));
-	ret = 1;
-	while (0 != ret && 5 > conn->i)
+	ret = 0;
+	while (0 == ret && 5 > conn->i)
 	{
 		conn->sock_fd = socket(AF_INET, SOCK_STREAM, 0);
 		bzero(&conn->servaddr, sizeof(conn->servaddr));
@@ -84,6 +78,13 @@ int		main(int argc, char **argv)
 		free(conn->speech);
 		conn->speech = NULL;
 		conn->i++;
+	}
+
+	int i = 0;
+	while (30 > i)
+	{
+		printf("sleeping...\n");
+		sleep(1);
 	}
 	return (0);
 }

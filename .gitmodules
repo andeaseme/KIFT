@@ -7,3 +7,9 @@
 [submodule "libft"]
 	path = libft
 	url = https://github.com/andeaseme/libft
+[submodule "osx-cpu-temp"]
+	path = osx-cpu-temp
+	url = https://github.com/lavoiesl/osx-cpu-temp.git
+[submodule "neofetch"]
+	path = neofetch
+	url = https://github.com/dylanaraps/neofetch.git
