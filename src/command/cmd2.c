@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:50:22 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/17 18:27:41 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/17 22:24:21 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,18 @@ int			cmd_showsysteminfo(void *cmd)
 	(void)cmd;
 	system("./neofetch/neofetch");
 	return (0);
+}
+
+int			cmd_whoami(void *cmd)
+{
+	(void)cmd;
+	system("whoami");
+	system("whoami | say");
+	return (0);
+}
+
+int			cmd_whereami(void *cmd)
+{
+	(void)cmd;
+	system("hostname");
 }
