@@ -23,11 +23,7 @@ def commandloop(command):
 		os.system('whoami')
 	elif (command == 'WHERE AM I'):
 		os.system('hostname')
-	elif (command == 'LIGHTS ON'): #NEED TO FIX MODEL
-		os.system('say fix')#FIX
-	elif (command == 'LIGHTS OFF')
-		os.system('say fix')#FIX
-	elif (command == 'CHECK LIGHTS')
+	elif (command == 'LIGHTS'): #NEED TO FIX MODEL
 		os.system('say fix')#FIX
 	else:
 		os.system('play ./../../resources/cantdo.wav')
