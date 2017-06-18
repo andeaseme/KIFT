@@ -52,31 +52,25 @@ struct s_con
 /*
 ** src/speech_recognition
 */
-char			*audiotostr(char *audiopath);
+char					*audiotostr(char *audiopath);
 
 /*
-** src/client
+** src/
 */
-char			*receive_string(struct s_con *conn);
-
-/*
-** src/server
-*/
-void				handle_signal(int status);
-int					init_server_save(void);
-struct s_con		*init_server(int port_num);
-int					increment_audio_count(int ac);
+void					handle_signal(int status);
+int						init_server_save(void);
+struct s_con			*init_server(int port_num);
+int						increment_audio_count(int ac);
 
 /*
 ** src/command
 */
-int				command(char *speech, struct s_con *temp);
-int				cmd_unknown(void *cmd);
-int				cmd_seteggtimer(void *cmd);
-int				cmd_showmetemps(void *cmd);
-int				cmd_toggletraining(void *cmd);
-int				cmd_googlesearch(void *cmd);
-int				cmd_googlemusic(void *cmd);
-int				cmd_sendemail(void *cmd);
-void 			train(void);
-int				cmd_showsysteminfo(void *cmd);
+int						command(char *speech, struct s_con *temp);
+int						cmd_unknown(void *cmd);
+int						cmd_seteggtimer(void *cmd);
+int						cmd_showmetemps(void *cmd);
+int						cmd_toggletraining(void *cmd);
+int						cmd_googlesearch(void *cmd);
+int						cmd_googlemusic(void *cmd);
+int						cmd_sendemail(void *cmd);
+int						cmd_showsysteminfo(void *cmd);

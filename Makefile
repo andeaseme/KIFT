@@ -21,7 +21,7 @@ SDIR =	src
 PS_IDIR = ~/.brew/Cellar/cmu-pocketsphinx/HEAD-05b866c/include/pocketsphinx
 S_IDIR = ~/.brew/Cellar/cmu-sphinxbase/HEAD-27a98f9/include
 
-vpath %.c	$(SDIR) $(SDIR)/speech_recognition $(SDIR)/command
+vpath %.c	$(SDIR) $(SDIR)/command
 
 HEADERS = -I $(IDIR) -I $(LDIR)/includes -I $(PS_IDIR) -I $(S_IDIR) -I $(S_IDIR)/sphinxbase
 CC = gcc
@@ -41,7 +41,7 @@ OBJ :=	$(addprefix $(ODIR)/,$(_OBJ))
 _C_OBJ =	client.o command.o cmd2.o cmd1.o utility.o
 C_OBJ :=	$(addprefix $(ODIR)/,$(_C_OBJ))
 
-_S_OBJ =	server.o audiotostr.o train.o utility.o
+_S_OBJ =	server.o audiotostr.o utility.o
 S_OBJ :=	$(addprefix $(ODIR)/,$(_S_OBJ))
 
 all: $(NAME)
