@@ -61,7 +61,6 @@ $(NAME): $(LIBFT)
 
 $(LIBFT): FORCE
 		$(MAKE) -C $(LDIR)
-		$(MAKE) -C SAM
 		$(MAKE) -C osx-cpu-temp
 
 $(CLIENT): $(C_OBJ)
