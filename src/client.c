@@ -56,23 +56,28 @@ char	*receive_string(struct s_con *conn)
 int		main(int argc, char **argv)
 {
 	int				ret;
-	int				port_num;
 	struct s_con	*conn;
 
 	conn = (struct s_con*)calloc(1, sizeof(struct s_con));
-	port_num = argc > 1 ? atoi(argv[1]) : SERVER_PORT;
+	conn->port_num = argc > 1 ? atoi(argv[1]) : SERVER_PORT;
 	ret = 0;
 	while (0 == ret && 5 > conn->i)
 	{
 		conn->sock_fd = socket(AF_INET, SOCK_STREAM, 0);
 		bzero(&conn->servaddr, sizeof(conn->servaddr));
 		conn->servaddr.sin_family = AF_INET;
-		conn->servaddr.sin_port = htons(port_num);
+		conn->servaddr.sin_port = htons(conn->port_num);
 		inet_pton(AF_INET, "127.0.0.1", &(conn->servaddr.sin_addr));
 		system("rm -rf *.wav");
-		printf("sending voice through port: %i\n", port_num);
+		printf("sending voice through port: %i\n", conn->port_num);
 		send_voice(conn);
 		printf("%s\n", conn->speech = receive_string(conn));
+		// TEST SECTION
+
+		free(conn->speech);
+		conn->speech = ft_strdup("SHOW HISTORY");
+
+		// TEST SECTION
 		ret = command(conn->speech, conn);
 		write(conn->sock_fd, &ret, sizeof(int));
 		free(conn->speech);

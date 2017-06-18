@@ -76,16 +76,15 @@ clean:
 		/bin/rm -rfv $(ODIR)
 		@echo '$@ $(NAME) $(ODIR)'
 		$(MAKE) -C $(LDIR) $@
-		rm -rf Train_src/serv_save
 
-fclean: clean
+fclean: clean wav
 		/bin/rm -f $(NAME)
 		@echo '$< $(NAME)'
 		$(MAKE) -C $(LDIR) $@
 
 re: fclean all
 
-wav: all
+wav:
 	/bin/rm -rfv Train_src/serv_save
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re wav

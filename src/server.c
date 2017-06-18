@@ -27,6 +27,7 @@ static void		server_save_command_data(char *command, int audio_count)
 	char	*str;
 	FILE	*fp;
 
+	printf("saving command to history\n");
 	asprintf(&str, "cp new_wav.wav ./Train_src/serv_save/audio_%i.wav",
 		audio_count);
 	system(str);
@@ -47,13 +48,19 @@ void			send_history(int comm_fd)
 	struct stat		st;
 	long			size;
 
+	printf("sending history...");
 	fd = open("./Train_src/serv_save/commands.transcription", O_RDONLY);
+	bzero(&st, sizeof(st));
 	fstat(fd, &st);
 	size = st.st_size;
 	write(comm_fd, &size, sizeof(size));
 	bzero(buff, 4096);
+	printf ("size: %li\n", size);
 	while ((bytes_read = read(fd, &buff, 4096)))
+	{
 		write(comm_fd, buff, bytes_read);
+		printf("%s", buff);
+	}
 	close(fd);
 	exit (0);
 }
@@ -90,7 +97,13 @@ static void		server_fork(struct s_con *conn, int audio_count)
 		? conn->speech : "ERROR", comm_fd);
 	read(comm_fd, &ret, sizeof(int));
 	close(comm_fd);
-	if (conn->speech && *conn->speech && 0 == ret)
+	// TEST SECTION
+
+	conn->speech = ft_strdup("SHOW HISTORY");
+	printf("ret: %i\nnew speech: %s\n", ret, conn->speech);
+
+	// TEST SECTION
+	if (conn->speech && *conn->speech && 0 != ret)
 	{
 		server_save_command_data(conn->speech, audio_count);
 		exit(0);
