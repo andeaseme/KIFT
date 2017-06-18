@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:49:45 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/17 23:15:44 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/18 15:25:37 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static char const	*g_cmd_name[] = {
 	"WHERE AM I",
 	"LIGHTS",
 	"SHOW HISTORY",
+	"SHOW ME WEATHER",
 	NULL
 };
 
@@ -50,7 +51,8 @@ static int			(*g_cmd_func[])(void *cmd) = {
 	&cmd_whoami,
 	&cmd_whereami,
 	&cmd_lights,
-	&cmd_history
+	&cmd_history,
+	&cmd_weather
 };
 
 static int			find_string(char *speech, char const *targets[])

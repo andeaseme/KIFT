@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 16:00:37 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/17 23:14:22 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/18 15:25:25 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,3 +81,4 @@ int						cmd_whoami(void *cmd);
 int						cmd_whereami(void *cmd);
 int						cmd_lights(void *cmd);
 int						cmd_history(void *cmd);
+int						cmd_weather(void *cmd);
