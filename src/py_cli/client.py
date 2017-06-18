@@ -19,10 +19,16 @@ def commandloop(command):
 		os.system('../../neofetch/neofetch')
 	elif (command == "SET EGG TIMER"):
 		os.system('open https://www.google.com/search?q=8+minute+timer&oq=8+minute+timer&aqs=chrome..69i57j0l5.2158j0j9&sourceid=chrome&ie=UTF-8')
-	elif (command == "SHOW CONNECTED USER"): #NEED TO GET MODEL TO RECOGNIZE IT
+	elif (command == "SHOW CONNECTED USER"):
 		os.system('whoami')
-	elif (command == 'WHERE AM I'): #NEED TO FIX MODEL
+	elif (command == 'WHERE AM I'):
 		os.system('hostname')
+	elif (command == 'LIGHTS ON'): #NEED TO FIX MODEL
+		os.system('say fix')#FIX
+	elif (command == 'LIGHTS OFF')
+		os.system('say fix')#FIX
+	elif (command == 'CHECK LIGHTS')
+		os.system('say fix')#FIX
 	else:
 		os.system('play ./../../resources/cantdo.wav')
 
