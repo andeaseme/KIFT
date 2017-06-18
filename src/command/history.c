@@ -12,7 +12,7 @@
 
 #include "kift.h"
 
-void	request_history(struct s_con *conn)
+static void		request_history(struct s_con *conn)
 {
 	char		*key;
 	long		size;
@@ -23,10 +23,9 @@ void	request_history(struct s_con *conn)
 	size = strlen(key);
 	write(conn->sock_fd, &size, sizeof(size));
 	write(conn->sock_fd, key, size);
-//	close(fd);
 }
 
-void	receive_history(struct s_con *conn)
+static void		receive_history(struct s_con *conn)
 {
 	char		*history;
 	char		buf;
@@ -54,7 +53,7 @@ void	receive_history(struct s_con *conn)
 	free(history);
 }
 
-void		finish_command(int	sock_fd)
+static void		finish_command(int sock_fd)
 {
 	int		ret;
 
@@ -62,7 +61,7 @@ void		finish_command(int	sock_fd)
 	write(sock_fd, &ret, sizeof(int));
 }
 
-int			cmd_history(void *cmd)
+int				cmd_history(void *cmd)
 {
 	int				port_num;
 	struct s_con	*conn;

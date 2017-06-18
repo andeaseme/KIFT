@@ -1,9 +1,3 @@
-[submodule "resources/SAM"]
-	path = resources/SAM
-	url = https://github.com/s-macke/SAM.git
-[submodule "SAM"]
-	path = SAM
-	url = https://github.com/s-macke/SAM.git
 [submodule "libft"]
 	path = libft
 	url = https://github.com/andeaseme/libft

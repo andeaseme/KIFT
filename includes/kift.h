@@ -77,6 +77,8 @@ void					handle_signal(int status);
 int						init_server_save(void);
 struct s_con			*init_server(int port_num);
 int						increment_audio_count(int ac);
+void					send_history(int comm_fd);
+
 
 /*
 ** src/command
