@@ -6,24 +6,11 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 14:45:49 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/18 15:08:05 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/18 16:32:31 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "kift.h"
-#include <pocketsphinx.h>
-
-typedef	struct s_wavtoa
-{
-	ps_decoder_t	*ps;
-	cmd_ln_t		*config;
-	FILE			*fh;
-	int				rv;
-	size_t			nsamp;
-	int16			buf[READ_SIZE];
-	char const		*hyp;
-	int32			score;
-}					t_wavtoa;
 
 char  	*audiotostr_util(char *audiopath, t_wavtoa *vars)
 {

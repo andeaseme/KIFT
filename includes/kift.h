@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 16:00:37 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/18 15:25:25 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/18 16:32:36 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <stdbool.h>
+#include <pocketsphinx.h>
 #include "libft.h"
 
 # define SERVER_PORT	22005
@@ -51,6 +52,18 @@ struct s_con
 	struct sockaddr_in	servaddr;
 	char				*speech;
 };
+
+typedef	struct s_wavtoa
+{
+	ps_decoder_t	*ps;
+	cmd_ln_t		*config;
+	FILE			*fh;
+	int				rv;
+	size_t			nsamp;
+	int16			buf[READ_SIZE];
+	char const		*hyp;
+	int32			score;
+}					t_wavtoa;
 
 /*
 ** src/speech_recognition
