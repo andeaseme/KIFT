@@ -7,13 +7,14 @@ from ctypes import *
 def commandloop(command):
 	if (command == "OPEN GOOGLE"):
 		os.system('open https://google.com')
-	if (command == "SEND EMAIL"):
+	elif (command == "SEND EMAIL"):
 		os.system('open https://gmail.com')
-	if (command == "SHOW ME TEMPS" | command == "SHOW ME TEMPERATURES")
+	elif (command == "SHOW ME TEMPS" | command == "SHOW ME TEMPERATURES")
 		os.system('osx-cpu-temp')
-	if (command == "OPEN GOOGLE MUSIC" | "OPEN GOOGLE MUSIC"):
+	elif (command == "OPEN GOOGLE MUSIC" | "OPEN MUSIC PLAYER"):
+		os.system('open https://music.google.com')
 
-	if (command  == "")
+
 
 
 

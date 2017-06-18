@@ -8,3 +8,5 @@ Open Google
 Open Google Music
 Open Music PLAYER
 Send e-mail
+Show me system information
+Show me weather
