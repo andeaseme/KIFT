@@ -62,7 +62,7 @@ void			send_history(int comm_fd)
 		printf("%s", buff);
 	}
 	close(fd);
-	exit (0);
+	exit (1);
 }
 
 static void		receive_file(int comm_fd)
