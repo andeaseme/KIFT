@@ -21,8 +21,7 @@ SDIR =	src
 PS_IDIR = ~/.brew/Cellar/cmu-pocketsphinx/HEAD-05b866c/include/pocketsphinx
 S_IDIR = ~/.brew/Cellar/cmu-sphinxbase/HEAD-27a98f9/include
 
-vpath %.c	$(SDIR) $(SDIR)/client_src $(SDIR)/server_src \
-			$(SDIR)/speech_recognition $(SDIR)/command
+vpath %.c	$(SDIR) $(SDIR)/speech_recognition $(SDIR)/command
 
 HEADERS = -I $(IDIR) -I $(LDIR)/includes -I $(PS_IDIR) -I $(S_IDIR) -I $(S_IDIR)/sphinxbase
 CC = gcc
@@ -33,17 +32,16 @@ SPHINXFLAGS =	-DMODELDIR=\"`pkg-config --variable=modeldir pocketsphinx`\" \
 LIBFT =	-L $(LDIR) -lft
 DEPS =	$(IDIR)/kift.h
 
-_OBJ =	command.o set_egg_timer.o cmd1.o \
+_OBJ =	command.o cmd2.o cmd1.o \
 		audiotostr.o \
-		client.o \
-		server.o utility_s.o
+		client.o server.o utility.o
 OBJ :=	$(addprefix $(ODIR)/,$(_OBJ))
 
 
-_C_OBJ =	client.o command.o set_egg_timer.o cmd1.o utility_s.o
+_C_OBJ =	client.o command.o cmd2.o cmd1.o utility.o
 C_OBJ :=	$(addprefix $(ODIR)/,$(_C_OBJ))
 
-_S_OBJ =	server.o audiotostr.o train.o utility_s.o
+_S_OBJ =	server.o audiotostr.o train.o utility.o
 S_OBJ :=	$(addprefix $(ODIR)/,$(_S_OBJ))
 
 all: $(NAME)

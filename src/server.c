@@ -62,7 +62,8 @@ static void		server_fork(struct s_con *conn, int audio_count)
 	comm_fd = accept(conn->sock_fd, (struct sockaddr*)NULL, NULL);
 	receive_file(comm_fd);
 	conn->speech = audiotostr("new_wav.wav");
-	send_string(conn->speech && *conn->speech ? conn->speech : "ERROR", comm_fd);
+	send_string(conn->speech && *conn->speech
+		? conn->speech : "ERROR", comm_fd);
 	read(comm_fd, &ret, sizeof(int));
 	close(comm_fd);
 	if (conn->speech && *conn->speech && 0 == ret)
