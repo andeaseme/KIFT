@@ -79,12 +79,5 @@ int		main(int argc, char **argv)
 		conn->speech = NULL;
 		conn->i++;
 	}
-
-	int i = 0;
-	while (30 > i)
-	{
-		printf("sleeping...\n");
-		sleep(1);
-	}
 	return (0);
 }
