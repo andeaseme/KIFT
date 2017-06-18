@@ -49,6 +49,7 @@ def connect(HOST, PORT):
 	print data
 
 if __name__ == "__main__":
+# SETUP
 	HOST = "127.0.0.1"
 	PORT = 22005
 	HOST = raw_input("Enter IP Default (127.0.0.1) if left empty: ")
@@ -62,6 +63,7 @@ if __name__ == "__main__":
 		PORT = int(ans)
 	print "HOST:" + HOST
 	print "PORT:" + str(PORT)
+# The loop for exectuion
 	while cont:
 		connect(HOST, PORT)
 		try:
