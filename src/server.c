@@ -36,6 +36,7 @@ static void		server_save_command_data(char *command, int audio_count)
 	fp = fopen("./Train_src/serv_save/commands.fileids", "ab+");
 	fprintf(fp, "audio_%i\n", audio_count);
 	fclose(fp);
+	free(str);
 }
 
 static void		receive_file(int comm_fd)

@@ -4,6 +4,19 @@ import os
 from bitarray import bitarray
 from ctypes import *
 
+def commandloop(command):
+	if (command == "OPEN GOOGLE"):
+		os.system('open https://google.com')
+	if (command == "SEND EMAIL"):
+		os.system('open https://gmail.com')
+	if (command == "SHOW ME TEMPS" | command == "SHOW ME TEMPERATURES")
+		os.system('osx-cpu-temp')
+	if (command == "OPEN GOOGLE MUSIC" | "OPEN GOOGLE MUSIC"):
+
+	if (command  == "")
+
+
+
 def connect(HOST, PORT):
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	s.connect((HOST, PORT))
@@ -21,6 +34,7 @@ def connect(HOST, PORT):
 	data = s.recv(1024)
 	print data
 	s.close
+	commandloop(data)
 
 if __name__ == "__main__":
 	HOST = "127.0.0.1"
