@@ -29,6 +29,7 @@ static char const	*g_cmd_name[] = {
 	"SHOW CONNECTED USER",
 	"WHERE AM I",
 	"LIGHTS",
+	"SHOW HISTORY",
 	NULL
 };
 
@@ -48,7 +49,8 @@ static int			(*g_cmd_func[])(void *cmd) = {
 	&cmd_showsysteminfo,
 	&cmd_whoami,
 	&cmd_whereami,
-	&cmd_lights
+	&cmd_lights,
+	&cmd_history
 };
 
 static int			find_string(char *speech, char const *targets[])

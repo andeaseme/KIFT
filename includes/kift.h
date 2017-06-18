@@ -80,3 +80,4 @@ int						cmd_showsysteminfo(void *cmd);
 int						cmd_whoami(void *cmd);
 int						cmd_whereami(void *cmd);
 int						cmd_lights(void *cmd);
+int						cmd_history(void *cmd);

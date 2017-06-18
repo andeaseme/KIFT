@@ -34,11 +34,11 @@ DEPS =	$(IDIR)/kift.h
 
 _OBJ =	command.o cmd2.o cmd1.o \
 		audiotostr.o \
-		client.o server.o utility.o
+		client.o server.o utility.o history.o
 OBJ :=	$(addprefix $(ODIR)/,$(_OBJ))
 
 
-_C_OBJ =	client.o command.o cmd2.o cmd1.o utility.o
+_C_OBJ =	client.o command.o cmd2.o cmd1.o utility.o history.o
 C_OBJ :=	$(addprefix $(ODIR)/,$(_C_OBJ))
 
 _S_OBJ =	server.o audiotostr.o utility.o
