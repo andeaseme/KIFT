@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:49:45 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/17 17:40:01 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/17 18:29:03 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static char const	*g_cmd_name[] = {
 	"OPEN GOOGLE MUSIC",
 	"OPEN MUSIC PLAYER",
 	"SEND E-MAIL",
+	"SHOW ME SYSTEM INFORMATION",
 	NULL
 };
 
@@ -41,6 +42,7 @@ static int			(*g_cmd_func[])(void *cmd) = {
 	&cmd_googlemusic,
 	&cmd_googlemusic,
 	&cmd_sendemail,
+	&cmd_showsysteminfo
 };
 
 static int			find_string(char *speech, char const *targets[])

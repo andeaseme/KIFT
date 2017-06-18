@@ -6,7 +6,7 @@
 #    By: aphan <aphan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/24 17:12:26 by aphan             #+#    #+#              #
-#    Updated: 2017/06/13 21:03:47 by rmatos           ###   ########.fr        #
+#    Updated: 2017/06/17 18:12:03 by rmatos           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ $(NAME): $(LIBFT)
 $(LIBFT): FORCE
 		$(MAKE) -C $(LDIR)
 		$(MAKE) -C SAM
+		$(MAKE) -C osx-cpu-temp
 
 $(CLIENT): $(C_OBJ)
 		$(CC) -o $@ $^ $(CFLAGS) $(SPHINXFLAGS)
