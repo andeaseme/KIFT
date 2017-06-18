@@ -6,7 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:49:45 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/14 20:07:57 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/17 17:40:01 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char const	*g_cmd_name[] = {
 	"SET EGG TIMER",
 	"SHOW ME TEMPS",
 	"SHOW ME TEMPERATURES",
-	"GOOGLE",
+	"OPEN GOOGLE",
 	"OPEN GOOGLE MUSIC",
 	"OPEN MUSIC PLAYER",
 	"SEND E-MAIL",
