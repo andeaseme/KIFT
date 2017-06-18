@@ -6,11 +6,7 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 14:50:22 by aphan             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2017/06/17 23:01:12 by rmatos           ###   ########.fr       */
-=======
-/*   Updated: 2017/06/17 22:34:07 by rpassafa         ###   ########.fr       */
->>>>>>> f239f4206fe9dd2d0a3be43c36ee6da7a61390f1
+/*   Updated: 2017/06/17 23:24:19 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +36,6 @@ int			cmd_showsysteminfo(void *cmd)
 	system("./neofetch/neofetch");
 	return (0);
 }
-<<<<<<< HEAD
 
 int			cmd_whoami(void *cmd)
 {
@@ -59,7 +54,29 @@ int			cmd_whereami(void *cmd)
 
 int			cmd_lights(void *cmd)
 {
-	
+	FILE *fp;
+	int	on;
+
+	(void)cmd;
+	if ((fp = fopen("lights", "r+")) == NULL)
+	{
+		system("echo 1 > lights");
+		system("say lights are on");
+		return (0);
+	}
+	fscanf(fp, "%i", &on);
+	fclose(fp);
+	system("rm -rf lights");
+	if (on)
+	{
+		system("echo 0 > lights");
+		system("say lights are off");
+	}
+	else
+	{
+		system("echo 1 > lights");
+		system("say lights are on");
+	}
+	return (0);
+
 }
-=======
->>>>>>> f239f4206fe9dd2d0a3be43c36ee6da7a61390f1
