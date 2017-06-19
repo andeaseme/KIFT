@@ -6,13 +6,13 @@
 /*   By: aphan <aphan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 14:45:49 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/18 16:32:31 by rmatos           ###   ########.fr       */
+/*   Updated: 2017/06/18 17:17:21 by rmatos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "kift.h"
 
-char  	*audiotostr_util(char *audiopath, t_wavtoa *vars)
+char	*audiotostr_util(char *audiopath, t_wavtoa *vars)
 {
 	if (NULL == audiopath || NULL == (vars->fh = fopen(audiopath, "rb")))
 	{
@@ -42,7 +42,6 @@ char	*audiotostr(char *audiopath)
 {
 	t_wavtoa vars;
 
-	system("play new_wav.wav");
 	if (NULL == (vars.config = cmd_ln_init(NULL, ps_args(), TRUE,
 			"-hmm", HMMDIR,
 			"-lm", LANGDIR,
