@@ -73,7 +73,7 @@ int				cmd_history(void *cmd)
 	bzero(&conn->servaddr, sizeof(conn->servaddr));
 	conn->servaddr.sin_family = AF_INET;
 	conn->servaddr.sin_port = htons(port_num);
-	inet_pton(AF_INET, "127.0.0.1", &(conn->servaddr.sin_addr));
+	inet_pton(AF_INET, conn->address, &(conn->servaddr.sin_addr));
 	printf("sending history request through port: %i\n", port_num);
 	request_history(conn);
 	receive_history(conn);

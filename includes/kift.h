@@ -29,6 +29,7 @@
 # include "libft.h"
 
 # define SERVER_PORT	22005
+# define SERVER_ADDRESS	"127.0.0.1"
 # define HMMDIR			"lang_model"
 # define LANGDIR		"lang_model/2823.lm"
 # define DICTDIR		"lang_model/2823.dic"
@@ -43,6 +44,7 @@
 struct					s_con
 {
 	int					i;
+	char				*address;
 	int					port_num;
 	int					sock_fd;
 	struct sockaddr_in	servaddr;
