@@ -59,7 +59,8 @@ int		main(int argc, char **argv)
 	struct s_con	*conn;
 
 	conn = (struct s_con*)calloc(1, sizeof(struct s_con));
-	conn->port_num = argc > 1 ? atoi(argv[1]) : SERVER_PORT;
+	conn->address = argc > 1 ? argv[1] : SERVER_ADDRESS;
+	conn->port_num = argc > 2 ? atoi(argv[2]) : SERVER_PORT;
 	ret = 0;
 	while (0 == ret && 5 > conn->i)
 	{
@@ -67,7 +68,7 @@ int		main(int argc, char **argv)
 		bzero(&conn->servaddr, sizeof(conn->servaddr));
 		conn->servaddr.sin_family = AF_INET;
 		conn->servaddr.sin_port = htons(conn->port_num);
-		inet_pton(AF_INET, "127.0.0.1", &(conn->servaddr.sin_addr));
+		inet_pton(AF_INET, conn->address, &(conn->servaddr.sin_addr));
 		system("rm -rf *.wav");
 		printf("sending voice through port: %i\n", conn->port_num);
 		send_voice(conn);
