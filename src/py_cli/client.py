@@ -23,14 +23,16 @@ def commandloop(command):
 		os.system('whoami')
 	elif (command == 'WHERE AM I'):
 		os.system('hostname')
-	elif (command == 'LIGHTS'): #NEED TO FIX MODEL
-		os.system('say fix')#FIX
 	else:
 		os.system('play ./../../resources/cantdo.wav')
 
 def connect(HOST, PORT):
-	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.connect((HOST, PORT))
+	try:
+		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		s.connect((HOST, PORT))
+	except socket.error:
+		print "SERVER DOWN FAM"
+		return
 	os.system("rec -c 1 -r 16000 -b 16 recording.wav \
 		gain +5 silence 1 0.1 3% 1 2.0 3%")
 	i = long(os.path.getsize("recording.wav"));
@@ -39,14 +41,16 @@ def connect(HOST, PORT):
 	s.send(bytearray(test))
 	f =  open('recording.wav', 'rb')
 	temp = f.read(i)
-	s.send(temp)
+	s.sendall(temp)
 	size = s.recv(4)
 	data = s.recv(1024)
 	print data
-	s.close
+	f.close
 	commandloop(data)
+	s.send(bytearray(c_int(1)))
+	s.close
+	f.close
 	data = ""
-	print data
 
 if __name__ == "__main__":
 # SETUP
