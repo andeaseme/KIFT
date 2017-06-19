@@ -27,8 +27,12 @@ def commandloop(command):
 		os.system('play ./../../resources/cantdo.wav')
 
 def connect(HOST, PORT):
-	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.connect((HOST, PORT))
+	try:
+		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		s.connect((HOST, PORT))
+	except socket.error:
+		print "SERVER DOWN FAM"
+		return
 	os.system("rec -c 1 -r 16000 -b 16 recording.wav \
 		gain +5 silence 1 0.1 3% 1 2.0 3%")
 	i = long(os.path.getsize("recording.wav"));
