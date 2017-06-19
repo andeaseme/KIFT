@@ -23,8 +23,6 @@ def commandloop(command):
 		os.system('whoami')
 	elif (command == 'WHERE AM I'):
 		os.system('hostname')
-	elif (command == 'LIGHTS'): #NEED TO FIX MODEL
-		os.system('say fix')#FIX
 	else:
 		os.system('play ./../../resources/cantdo.wav')
 
@@ -39,14 +37,16 @@ def connect(HOST, PORT):
 	s.send(bytearray(test))
 	f =  open('recording.wav', 'rb')
 	temp = f.read(i)
-	s.send(temp)
+	s.sendall(temp)
 	size = s.recv(4)
 	data = s.recv(1024)
 	print data
-	s.close
+	f.close
 	commandloop(data)
+	s.send(bytearray(c_int(1)))
+	s.close
+	f.close
 	data = ""
-	print data
 
 if __name__ == "__main__":
 # SETUP
