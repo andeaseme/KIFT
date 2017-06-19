@@ -75,6 +75,8 @@ clean:
 		/bin/rm -rfv $(ODIR)
 		@echo '$@ $(NAME) $(ODIR)'
 		$(MAKE) -C $(LDIR) $@
+		$(MAKE) -C osx-cpu-temp $@
+		
 
 fclean: clean wav
 		/bin/rm -f $(NAME)
