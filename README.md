@@ -1,22 +1,52 @@
-#K.I.F.T.
+# K.I.F.T.
 
-#COMMAND LIST
-Set egg timer
-Show me temps
-Show me temperatures
-Open Google
-Open Google Music
-Open Music PLAYER
-Send e-mail
-Show me system information (c) / System information (python)
-Show me weather
-Who am I
-Show connected user
-Where am I
-Lights
-History*
+## Description
+Simple voice user interface software using [CMU Sphinx](http://cmusphinx.sourceforge.net/) speech recognition library.
+
+Tested on OS X 10.11 and currently must be locally hosted (Server and Client on the same machine) due to unresolved issues with sending files over the network.
+
+### Server
+Handles all speech-to-text functionality, then saves command and audio history if the command is recognized by the client.
+### Client
+Sends the audio file to the server.  Receives the text.  Processes commands implemented in the client.
+
+## Usage
+### Compile and Run
+```bash
+make
+./server
+./client #seperate terminal
+```
+### User Input
+For each command, run client
+```bash
+./client
+```
+Then speak your command from the list below into your microphone.
+### Options
+Default server address and port are 127.0.0.1 and 22005.  Both can be modified.
+```bash
+./server [port_number]
+```
+```bash
+./client [server_address [port_number]]
+```
+
+## Voice Command List
+Set Egg Timer\
+Show Me Temps\
+Show Me Temperatures\
+Open Google\
+Open Google Music\
+Open Music Player\
+Send E-mail\
+Show Me System Information (c) / System Information (python)\
+Show Me Weather\
+Who Am I\
+Show Connected User\
+Where Am I\
+Lights\
+Show History
 
 
-NOTES: fix c client to work with diff ip
-	-implement history
-	-implement history playback
+#### Future updates: fix c client to work with diff ip
