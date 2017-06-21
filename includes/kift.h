@@ -10,25 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-<<<<<<< HEAD
 #ifndef KIFT_H
 # define KIFT_H
-=======
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <sys/stat.h>
-#include <netdb.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <arpa/inet.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <time.h>
-#include <stdbool.h>
-#include "libft.h"
-#include "get_next_line.h"
->>>>>>> cf34ca41282c4db18331deff4641838e0bd1ecf1
 
 # include <sys/types.h>
 # include <sys/socket.h>
@@ -68,7 +51,6 @@ struct					s_con
 	char				*speech;
 };
 
-<<<<<<< HEAD
 typedef	struct			s_wavtoa
 {
 	ps_decoder_t		*ps;
@@ -80,21 +62,11 @@ typedef	struct			s_wavtoa
 	char const			*hyp;
 	int32				score;
 }						t_wavtoa;
-=======
-/*
-** src/speech_recognition
-*/
-char		*audiotostr(char *audiopath);
->>>>>>> cf34ca41282c4db18331deff4641838e0bd1ecf1
 
 /*
 ** src/speech_recognition
 */
-<<<<<<< HEAD
 char					*audiotostr(char *audiopath);
-=======
-void 			send_voice(struct s_con *temp);
->>>>>>> cf34ca41282c4db18331deff4641838e0bd1ecf1
 
 /*
 ** src/
@@ -108,7 +80,6 @@ void					send_history(int comm_fd);
 /*
 ** src/command
 */
-<<<<<<< HEAD
 int						command(char *speech, struct s_con *temp);
 int						cmd_unknown(void *cmd);
 int						cmd_seteggtimer(void *cmd);
@@ -125,18 +96,3 @@ int						cmd_history(void *cmd);
 int						cmd_weather(void *cmd);
 
 #endif
-=======
-int				command(char *speech, struct s_con *temp);
-int				find_string(char *speech, char const *targets[]);
-int				cmd_unknown(struct s_con *temp);
-int				cmd_seteggtimer(struct s_con *temp);
-int				cmd_showmetemps(struct s_con *temp);
-int				cmd_opengoogle(struct s_con *temp);
-void 			train(void);
-
-/*
-** src/utility.c
-*/
-char			*receive_string(struct s_con *temp);
-void 			send_string(char *str, int comm_fd);
->>>>>>> cf34ca41282c4db18331deff4641838e0bd1ecf1

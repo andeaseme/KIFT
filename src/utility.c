@@ -1,27 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-<<<<<<< HEAD
-/*   server.c                                           :+:      :+:    :+:   */
+/*   utility.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschroed <bschroed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 00:22:58 by bschroed          #+#    #+#             */
 /*   Updated: 2017/06/14 19:54:40 by rmatos           ###   ########.fr       */
-=======
-/*   utility.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aphan <aphan@student.42.us.org>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/13 22:26:16 by aphan             #+#    #+#             */
-/*   Updated: 2017/06/13 22:26:32 by aphan            ###   ########.fr       */
->>>>>>> cf34ca41282c4db18331deff4641838e0bd1ecf1
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "kift.h"
 
-<<<<<<< HEAD
 void				handle_signal(int status)
 {
 	RED;
@@ -114,26 +104,4 @@ void				send_history(int comm_fd)
 	}
 	close(fd);
 	exit(1);
-=======
-void 	send_string(char *str, int comm_fd)
-{
-	uint32_t len;
-
-	len = strlen(str);
-	write(comm_fd, &len, sizeof(uint32_t));
-	write(comm_fd, str, sizeof(char) * len);
-}
-
-char	*receive_string(struct s_con *temp)
-{
-	char		buff[4096];
-	int			bytes_read;
-	uint32_t	len;
-
-	read(temp->sock_fd, &len, sizeof(uint32_t));
-	bytes_read = read(temp->sock_fd, &buff, len * (sizeof(char)));
-	buff[bytes_read] = '\0';
-	printf("received string: %s\n", buff);
-	return (ft_strdup(buff));
->>>>>>> cf34ca41282c4db18331deff4641838e0bd1ecf1
 }

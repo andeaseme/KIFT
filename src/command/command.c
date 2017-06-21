@@ -18,7 +18,6 @@
 
 static char const	*g_cmd_name[] = {
 	"unknown command",
-<<<<<<< HEAD
 	"SET EGG TIMER",
 	"SHOW ME TEMPS",
 	"SHOW ME TEMPERATURES",
@@ -32,12 +31,6 @@ static char const	*g_cmd_name[] = {
 	"LIGHTS",
 	"SHOW HISTORY",
 	"SHOW ME WEATHER",
-=======
-	"set egg timer",
-	"set a timer",
-	"show me temps",
-	"open google",
->>>>>>> cf34ca41282c4db18331deff4641838e0bd1ecf1
 	NULL
 };
 
@@ -49,7 +42,6 @@ static int			(*g_cmd_func[])(void *cmd) = {
 	&cmd_unknown,
 	&cmd_seteggtimer,
 	&cmd_showmetemps,
-<<<<<<< HEAD
 	&cmd_showmetemps,
 	&cmd_googlesearch,
 	&cmd_googlemusic,
@@ -64,12 +56,6 @@ static int			(*g_cmd_func[])(void *cmd) = {
 };
 
 static int			find_string(char *speech, char const *targets[])
-=======
-	&cmd_opengoogle
-};
-
-int		find_string(char *speech, char const *targets[])
->>>>>>> cf34ca41282c4db18331deff4641838e0bd1ecf1
 {
 	int		i;
 
