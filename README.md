@@ -1,9 +1,12 @@
-# K.I.F.T.
+# Knight Industries Forty Two
+Project inspired by [KITT](https://en.wikipedia.org/wiki/KITT) from Knight Rider
 
 ## Description
-Simple voice user interface software using [CMU Sphinx](http://cmusphinx.sourceforge.net/) speech recognition library.
+Simple voice user interface software using [CMU Sphinx](http://cmusphinx.sourceforge.net/) speech recognition library. 
 
-Tested on OS X 10.11 and currently must be locally hosted (Server and Client on the same machine) due to unresolved issues with sending files over the network.
+Additional information available in [KIFT/resources/KIFT.pdf](https://github.com/andeaseme/KIFT/blob/master/resources/KIFT.pdf)
+
+Tested on OS X 10.11
 
 ### Server
 Handles all speech-to-text functionality, then saves command and audio history if the command is recognized by the client.
